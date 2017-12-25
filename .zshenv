@@ -1,21 +1,21 @@
 typeset -gx -U path
 path=( \
-  /usr/local/bin(N-/) \
-  ~/bin(N-/) \
-  ~/.zplug/bin(N-/) \
-  ~/.tmux/bin(N-/) \
-  "$path[@]" \
-  )
+    /usr/local/bin(N-/) \
+    ~/bin(N-/) \
+    ~/.zplug/bin(N-/) \
+    ~/.tmux/bin(N-/) \
+    "$path[@]" \
+    )
 
 # NOTE: set fpath before compinit
 typeset -gx -U fpath
 fpath=( \
-  ~/.zsh/Completion(N-/) \
-  ~/.zsh/functions(N-/) \
-  ~/.zsh/plugins/zsh-completions(N-/) \
-  /usr/local/share/zsh/site-functions(N-/) \
-  $fpath \
-  )
+    ~/.zsh/Completion(N-/) \
+    ~/.zsh/functions(N-/) \
+    ~/.zsh/plugins/zsh-completions(N-/) \
+    /usr/local/share/zsh/site-functions(N-/) \
+    $fpath \
+    )
 
 # autoload
 autoload -Uz run-help
@@ -58,13 +58,11 @@ export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46
 setopt no_global_rcs
 # Add ~/bin to PATH
 export PATH=~/bin:"$PATH"
-export PATH="/usr/local/bin:$PATH:/usr/local/sbin"
 
 # Settings for golang
 export GOPATH="$HOME"
 export GOBIN="$GOPATH/bin"
 export PATH="$GOBIN:$PATH"
-
 
 # declare the environment variables
 export CORRECT_IGNORE='_*'
@@ -73,9 +71,13 @@ export CORRECT_IGNORE_FILE='.*'
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 export WORDCHARS='*?.[]~&;!#$%^(){}<>'
 
+# History file and its size
+export HISTFILE=~/.zsh_history
+export HISTSIZE=1000000
+export SAVEHIST=1000000
+
 # fzf - command-line fuzzy finder (https://github.com/junegunn/fzf)
 export FZF_DEFAULT_OPTS="--extended --ansi --multi"
-
 
 # Cask
 #export HOMEBREW_CASK_OPTS="--appdir=/Applications"
@@ -91,14 +93,11 @@ export SAVEHIST=1000000
 export LISTMAX=50
 # Do not add in root
 if [[ $UID == 0 ]]; then
-  unset HISTFILE
-  export SAVEHIST=0
+    unset HISTFILE
+    export SAVEHIST=0
 fi
 
 # available $INTERACTIVE_FILTER
 export INTERACTIVE_FILTER="fzf:peco:percol:gof:pick"
 
-# keybind ^X^X
-export ONELINER_FILE="$DOTPATH/doc/misc/commands.txt"
-
-[[ -f ~/.secret ]] && source ~/.secret
+export DOTPATH=${0:A:h}
