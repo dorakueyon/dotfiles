@@ -16,7 +16,7 @@ deploy: ## Create symlink to home director
 	@$(foreach val, $(DOTFILES), ln -sfnv $(abspath $(val)) $(HOME)/$(val);)
 
 init: ## Create symlink to home director
-	@DOTPATH=$(DOTPATH) 
+	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/init/init.sh
 	
 update: ## Fetch changes for this repo
 	git pull origin master
