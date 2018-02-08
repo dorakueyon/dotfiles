@@ -51,9 +51,8 @@ if ! has "zsh"; then
             ;;
     esac
 fi
-
 # Run the forced termination with a last exit code
-exit $?
+#exit $?
 
 # Assign zsh as a login shell
 if ! contains "${SHELL:-}" "zsh"; then
