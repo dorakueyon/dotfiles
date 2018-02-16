@@ -639,12 +639,12 @@ endfunction
 command! Cdcd call <SID>cd_file_parentdir()
 nnoremap Q :<C-u>call <SID>cd_file_parentdir()<CR>
 
-if g:env.vimrc.auto_cd_file_parentdir == g:true
-    augroup cd-file-parentdir
-        autocmd!
-        autocmd BufRead,BufEnter * call <SID>cd_file_parentdir()
-    augroup END
-endif
+"if g:env.vimrc.auto_cd_file_parentdir == g:true
+"    augroup cd-file-parentdir
+"        autocmd!
+"        autocmd BufRead,BufEnter * call <SID>cd_file_parentdir()
+"    augroup END
+"endif
 
 " QuickLook for mac {{{1
 if IsMac() && !g:env.bin.qlmanage
