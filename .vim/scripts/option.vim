@@ -206,6 +206,9 @@ endif
 "    call mkdir(&undodir)
 "endif
 
+" Check the current folder for tags file and keep going one directory up all the way to the root folder
+set tags=./.tags;
+
 " Use clipboard
 if has('clipboard')
     set clipboard=unnamed
