@@ -54,6 +54,7 @@ if g:plug.ready() && g:env.vimrc.plugin_on
     " syntax? language support
     Plug 'fatih/vim-go', { 'for': 'go' }
     Plug 'jnwhiteh/vim-golang', { 'for': 'go' }
+    Plug 'posva/vim-vue'
     "Plug 'zaiste/tmux.vim', { 'for': 'tmux' }
     Plug 'keith/tmux.vim', { 'for': 'tmux' }
     Plug 'dag/vim-fish', { 'for': 'fish' }
