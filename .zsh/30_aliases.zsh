@@ -1,9 +1,5 @@
 month=`date "+%b"`
 
-alias write="cd ~/Dropbox/Projects/oki_projects/Memo/ && vim Memo_for_${month}.mdown"
-alias memomemo="vi ~/Dropbox/Projects/memo/memo.mdown"
-alias go_memo="vi ~/Dropbox/Projects/memo/go_memo.mdown"
-alias gwp="cd ~/Dropbox/Projects/oki_projects/"
 alias google="vi ~/Dropbox/Projects/google-interview-university/README.md"
 alias machine="vi ~/Dropbox/Projects/machine-learning-for-software-engineers/README.md"
 # alias ls="ls -GF"
@@ -18,6 +14,7 @@ alias vi="reattach-to-user-namespace vim"
 # alias g='cd $(find ~/src/github.com -follow  -maxdepth 2 -mindepth 2 -type d|peco)'
 alias g='cd $(find ~/src -follow  -maxdepth 3 -mindepth 3 -type d|peco)'
 alias gh='hub browse $(ghq list | peco | cut -d "/" -f 2,3)'
+alias ghe='GITHUB_HOST=ghe.kst3.jp hub browse $(find ~/src -follow  -maxdepth 3 -mindepth 3 -type d|peco | cut -d "/" -f 6,7)'
 alias ctags="`brew --prefix`/bin/ctags"
 
 cdls ()
