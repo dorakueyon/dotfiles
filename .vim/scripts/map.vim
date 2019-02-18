@@ -86,10 +86,12 @@ vnoremap <C-j><C-j> <ESC>
 onoremap jj <ESC>
 inoremap j[Space] j
 onoremap j[Space] j
-nnoremap : ;
+" nnoremap : ;
+nnoremap : :Buffers<CR>
 nnoremap ; :
 nnoremap q; q:
-vnoremap : ;
+"vnoremap : ;
+vnoremap : :Buffers<CR>
 vnoremap ; :
 vnoremap q; q:
 cnoreabbrev w!! w !sudo tee > /dev/null %
