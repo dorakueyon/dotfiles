@@ -524,5 +524,11 @@ endif
 if g:plug.is_installed('') " {{{1
 endif
 
+if g:plug.is_installed('sonictemplate-vim') "{{{1
+    let g:sonictemplate_vim_template_dir = [ '~/.vim/template']
+endif
+
+
+
 " __END__ {{{1
 " vim:fdm=marker expandtab fdc=3:

@@ -50,6 +50,7 @@ if g:plug.ready() && g:env.vimrc.plugin_on
     Plug 'tpope/vim-fugitive'
     Plug 'mattn/emmet-vim'
     Plug 'majutsushi/tagbar'
+    Plug 'mattn/sonictemplate-vim'
 
     " syntax? language support
     Plug 'fatih/vim-go', { 'for': 'go' }
