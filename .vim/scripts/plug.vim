@@ -76,6 +76,12 @@ if g:plug.ready() && g:env.vimrc.plugin_on
     Plug 'kylef/apiblueprint.vim'
     Plug 'millermedeiros/vim-esformatter'
     Plug 'juvenn/mustache.vim'
+    Plug 'posva/vim-vue', { 'for': 'javascript' }
+    Plug 'leafgarland/typescript-vim'
+
+    " lint for javascript
+    Plug 'w0rp/ale', { 'for': 'javascript' }
+
 
     " colorscheme
     Plug 'b4b4r07/solarized.vim'

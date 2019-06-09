@@ -96,11 +96,6 @@ printf "$fg_bold[cyan] - DISPLAY on $fg_bold[red]$DISPLAY$reset_color\n\n"
 # vim:fdm=marker fdc=3 ft=zsh ts=4 sw=4 sts=4:
 
 
-export NVM_DIR="/Users/yoheia/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
-
-export PATH="$PATH:$HOME/.rbenv/bin"
 eval "$(rbenv init - zsh)"
 
 # prompt
