@@ -56,6 +56,8 @@ if g:plug.ready() && g:env.vimrc.plugin_on
     Plug 'fatih/vim-go', { 'for': 'go' }
     Plug 'jnwhiteh/vim-golang', { 'for': 'go' }
     Plug 'posva/vim-vue'
+    Plug 'hashivim/vim-terraform', { 'for': 'tf' }
+    Plug 'hashivim/vim-terraform', { 'for': 'tfvars' }
     "Plug 'zaiste/tmux.vim', { 'for': 'tmux' }
     Plug 'keith/tmux.vim', { 'for': 'tmux' }
     Plug 'dag/vim-fish', { 'for': 'fish' }
