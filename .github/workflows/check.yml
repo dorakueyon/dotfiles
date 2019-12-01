@@ -3,15 +3,18 @@ name: CI
 on: [push]
 
 jobs:
-  build:
-
+  ubuntu:
     runs-on: ubuntu-latest
+    container: ubuntu:latest
 
     steps:
     - uses: actions/checkout@v1
-    - name: Run a one-line script
-      run: echo Hello, world!
-    - name: Run a multi-line script
+    - name: Install required packages
+      run: apt-get update && apt-get install -y git sudo
+    - name: Install dotfiles
       run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
+        echo starting dotfiles install
+        make init
+        make deploy
+        make install
+        echo complete dotfiles installation
