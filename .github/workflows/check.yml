@@ -14,7 +14,5 @@ jobs:
     - name: Install dotfiles
       run: |
         echo starting dotfiles install
-        make init
-        make deploy
         make install
         echo complete dotfiles installation
