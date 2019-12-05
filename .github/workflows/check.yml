@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Install required packages
-        run: yum install -y make sudo
+        run: yum install -y make sudo which
       - name: Install dotfiles
         run: make init
 
