@@ -34,7 +34,7 @@ case "$(get_os)" in
       sudo yum -y install go
     elif has "apt-get"; then
         log_echo "Install go with Advanced Packaging Tool"
-        sudo apt-get -y install go
+        sudo apt-get -y install golang
     elif has "apk"; then
         log_echo "Install go with apk"
         sudo apk add --no-cache go
