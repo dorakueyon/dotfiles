@@ -39,10 +39,10 @@ if ! has "zsh"; then
                 log_echo "Install zsh with Advanced Packaging Tool"
                 sudo apt-get -y install zsh
             elif has "apk"; then
-                log_echo "Install git with apk"
+                log_echo "Install zsh with apk"
                 sudo apk -y add --no-cache zsh
 			elif has "pacman"; then
-                log_echo "Install git with pacman"
+                log_echo "Install zsh with pacman"
 				pacman -S --noconfirm zsh
             else
                 log_fail "error: require: YUM, APT, APK or PACMAN"
