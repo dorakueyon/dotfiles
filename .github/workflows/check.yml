@@ -19,6 +19,8 @@ jobs:
     container: centos:latest
     steps:
       - uses: actions/checkout@v1
+      - name: Install required packages
+        run: yum install -y make sudo
       - name: Install dotfiles
         run: make init
 
