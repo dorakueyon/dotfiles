@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Install required packages
-      run: apt-get update && apt-get install -y git make wget sudo
+      run: apt-get update && apt-get install -y make wget sudo
     - name: Install dotfiles
       run: |
         echo starting dotfiles install
