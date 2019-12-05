@@ -64,12 +64,6 @@ fi
 if ! contains "${SHELL:-}" "zsh"; then
     zsh_path="$(which zsh)"
 
-    # Check /etc/shells
-    if ! grep -xq "${zsh_path:=/bin/zsh}" /etc/shells; then
-        log_fail "oh, you should append '$zsh_path' to /etc/shells"
-        exit 1
-    fi
-
     if [ -x "$zsh_path" ]; then
         if has "chsh"; then
 			# Changing for a general user

@@ -42,7 +42,7 @@ jobs:
       - name: Update packages
         run: pacman -Syu --noconfirm
       - name: Install required packages
-        run: pacman -S --noconfirm sudo make which
+        run: pacman -S --noconfirm sudo make which grep
       - name: Install dotfiles
         run: make init
 
