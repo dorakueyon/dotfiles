@@ -35,6 +35,9 @@ if ! has "git"; then
             elif has "apt-get"; then
                 log_echo "Install git with Advanced Packaging Tool"
                 sudo apt-get -y install git
+            elif has "apk"; then
+                log_echo "Install git with apk"
+                sudo apk -y add --no-cache git
             else
                 log_fail "error: require: YUM or APT"
                 exit 1

@@ -171,4 +171,15 @@ lower() {
     fi | tr "[:upper:]" "[:lower:]"
 }
 
-
+# contains returns true if the specified string contains
+# the specified substring, otherwise returns false
+# http://stackoverflow.com/questions/2829613/how-do-you-tell-if-a-string-contains-another-string-in-unix-shell-scripting
+contains() {
+    string="$1"
+    substring="$2"
+    if [ "${string#*$substring}" != "$string" ]; then
+        return 0    # $substring is in $string
+    else
+        return 1    # $substring is not in $string
+    fi
+}
