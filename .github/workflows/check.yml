@@ -14,6 +14,6 @@ jobs:
     - name: Install dotfiles
       run: |
         echo starting dotfiles install
-        cd dotfile
+        cd dotfiles
         make init
         echo complete dotfiles installation
