@@ -41,8 +41,11 @@ if ! has "zsh"; then
             elif has "apk"; then
                 log_echo "Install git with apk"
                 sudo apk -y add --no-cache zsh
+			elif has "pacman"; then
+                log_echo "Install git with pacman"
+				pacman -S --noconfirm zsh
             else
-                log_fail "error: require: YUM or APT"
+                log_fail "error: require: YUM, APT, APK or PACMAN"
                 exit 1
             fi
             ;;
