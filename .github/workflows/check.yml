@@ -30,7 +30,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Install required packages
-        run: apk add sudo bash
+        run: apk add sudo bash make
       - name: Install dotfiles
         run: make init
 
@@ -42,7 +42,7 @@ jobs:
       - name: Update packages
         run: pacman -Syu --noconfirm
       - name: Install required packages
-        run: pacman -S --noconfirm sudo
+        run: pacman -S --noconfirm sudo make
       - name: Install dotfiles
         run: make init
 
