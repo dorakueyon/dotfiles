@@ -68,22 +68,25 @@ if ! contains "${SHELL:-}" "zsh"; then
     fi
 
     if [ -x "$zsh_path" ]; then
-        # Changing for a general user
-        if chsh -s "$zsh_path" "${USER:-root}"; then
-            log_pass "Change shell to $zsh_path for ${USER:-root} successfully"
-        else
-            log_fail "cannot set '$path' as \$SHELL"
-            log_fail "Is '$path' described in /etc/shells?"
-            log_fail "you should run 'chsh -l' now"
-            exit 1
-        fi
+        if has "chsh"; then
+			# Changing for a general user
 
-        # For root user
-        if [ ${EUID:-${UID}} = 0 ]; then
-            if chsh -s "$zsh_path" && :; then
-                log_pass "[root] change shell to $zsh_path successfully"
-            fi
-        fi
+			if chsh -s "$zsh_path" "${USER:-root}"; then
+				log_pass "Change shell to $zsh_path for ${USER:-root} successfully"
+			else
+				log_fail "cannot set '$path' as \$SHELL"
+				log_fail "Is '$path' described in /etc/shells?"
+				log_fail "you should run 'chsh -l' now"
+				exit 1
+			fi
+
+			# For root user
+			if [ ${EUID:-${UID}} = 0 ]; then
+				if chsh -s "$zsh_path" && :; then
+					log_pass "[root] change shell to $zsh_path successfully"
+				fi
+			fi
+		fi
     else
         log_fail "$zsh_path: invalid path"
         exit 1
