@@ -30,7 +30,8 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Install required packages
-        run: apk add sudo bash make
+        run: |
+            apk update && apk add --no-cache sudo bash make musl-dev gcc build-base
       - name: Install dotfiles
         run: make init
 
