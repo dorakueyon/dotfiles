@@ -1,0 +1,15 @@
+repos = [
+    "github.com/motemen/ghq",
+    "github.com/junegunn/fzf/...",
+    "github.com/peco/peco/...",
+]
+
+[emoji]
+
+[emoji.verbose]
+pass = ":ok_woman:"
+fail = ":no_good:"
+
+[emoji.download]
+pass = ":arrow_right:"
+fail = ":x:"
