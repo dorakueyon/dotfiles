@@ -9,21 +9,21 @@ set -eu
 # For more information, see etc/README.md
 . "$DOTPATH"/etc/lib/vital.sh
 
-# If you don't have Z shell or don't find zsh preserved
+# If you don't have Z shell or don't find fish preserved
 # in a directory with the path,
 # to install it after the platforms are detected
-if ! has "zsh"; then
+if ! has "fish"; then
 
-    # Install zsh
+    # Install fish
     case "$(get_os)" in
         # Case of OS X
         osx)
             if has "brew"; then
-                log_echo "Install zsh with Homebrew"
-                brew install zsh
+                log_echo "Install fish with Homebrew"
+                brew install fish
             elif "port"; then
-                log_echo "Install zsh with MacPorts"
-                sudo port install zsh-devel
+                log_echo "Install fish with MacPorts"
+                sudo port install fish-devel
             else
                 log_fail "error: require: Homebrew or MacPorts"
                 exit 1
@@ -33,17 +33,17 @@ if ! has "zsh"; then
         # Case of Linux
         linux)
             if has "yum"; then
-                log_echo "Install zsh with Yellowdog Updater Modified"
-                sudo yum -y install zsh
+                log_echo "Install fish with Yellowdog Updater Modified"
+                sudo yum -y install fish
             elif has "apt-get"; then
-                log_echo "Install zsh with Advanced Packaging Tool"
-                sudo apt-get -y install zsh
+                log_echo "Install fish with Advanced Packaging Tool"
+                sudo apt-get -y install fish
             elif has "apk"; then
-                log_echo "Install zsh with apk"
-                sudo apk -y add --no-cache zsh
+                log_echo "Install fish with apk"
+                sudo apk -y add --no-cache fish
 			elif has "pacman"; then
-                log_echo "Install zsh with pacman"
-				pacman -S --noconfirm zsh
+                log_echo "Install fish with pacman"
+				pacman -S --noconfirm fish
             else
                 log_fail "error: require: YUM, APT, APK or PACMAN"
                 exit 1
@@ -60,16 +60,16 @@ fi
 # Run the forced termination with a last exit code
 #exit $?
 
-# Assign zsh as a login shell
-if ! contains "${SHELL:-}" "zsh"; then
-    zsh_path="$(which zsh)"
+# Assign fish as a login shell
+if ! contains "${SHELL:-}" "fish"; then
+    fish_path="$(which fish)"
 
-    if [ -x "$zsh_path" ]; then
+    if [ -x "$fish_path" ]; then
         if has "chsh"; then
 			# Changing for a general user
 
-			if chsh -s "$zsh_path" "${USER:-root}"; then
-				log_pass "Change shell to $zsh_path for ${USER:-root} successfully"
+			if chsh -s "$fish_path" "${USER:-root}"; then
+				log_pass "Change shell to $fish_path for ${USER:-root} successfully"
 			else
 				log_fail "cannot set '$path' as \$SHELL"
 				log_fail "Is '$path' described in /etc/shells?"
@@ -79,13 +79,13 @@ if ! contains "${SHELL:-}" "zsh"; then
 
 			# For root user
 			if [ ${EUID:-${UID}} = 0 ]; then
-				if chsh -s "$zsh_path" && :; then
-					log_pass "[root] change shell to $zsh_path successfully"
+				if chsh -s "$fish_path" && :; then
+					log_pass "[root] change shell to $fish_path successfully"
 				fi
 			fi
 		fi
     else
-        log_fail "$zsh_path: invalid path"
+        log_fail "$fish_path: invalid path"
         exit 1
     fi
 fi
