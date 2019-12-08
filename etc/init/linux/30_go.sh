@@ -40,7 +40,7 @@ case "$(get_os)" in
         sudo apk add --no-cache go
 	elif has "pacman"; then
          log_echo "Install go with pacman"
-		pacman -S --noconfirm go
+		pacman -Sy --noconfirm go
      else
          log_fail "error: require: YUM, APT, APK or PACMAN"
          exit 1
