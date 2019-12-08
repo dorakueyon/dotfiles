@@ -1,7 +1,10 @@
 DOTPATH    := $(realpath $(dir $(lastword $(MAKEFILE_LIST))))
 CANDIDATES := $(wildcard .??*) bin
-EXCLUSIONS := .DS_Store .git .gitignore .gitconfig .github .gitmodules
+EXCLUSIONS := .DS_Store .git .gitignore .github .gitmodules
 DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES))
+
+list: ## Show dot files in this repo
+	@$(foreach val, $(DOTFILES), /bin/ls -dF $(val);)
 
 deploy: ## Create symlink to home director
 	@echo '==> Start to deploy dotfiles to home directory.'
