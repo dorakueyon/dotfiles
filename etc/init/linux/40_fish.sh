@@ -51,8 +51,7 @@ if ! has "fish"; then
             ;;
 
         # Other platforms such as BSD are supported
-        *)
-            log_fail "error: this script is only supported osx and linux"
+        *) log_fail "error: this script is only supported osx and linux"
             exit 1
             ;;
     esac
@@ -60,32 +59,32 @@ fi
 # Run the forced termination with a last exit code
 #exit $?
 
-## Assign fish as a login shell
-#if ! contains "${SHELL:-}" "fish"; then
-#    fish_path="$(which fish)"
-#
-#    if [ -x "$fish_path" ]; then
-#        if has "chsh"; then
-#			# Changing for a general user
-#
-#			if chsh -s "$fish_path" "${USER:-root}"; then
-#				log_pass "Change shell to $fish_path for ${USER:-root} successfully"
-#			else
-#				log_fail "cannot set '$path' as \$SHELL"
-#				log_fail "Is '$path' described in /etc/shells?"
-#				log_fail "you should run 'chsh -l' now"
-#				exit 1
-#			fi
-#
-#			# For root user
-#			if [ ${EUID:-${UID}} = 0 ]; then
-#				if chsh -s "$fish_path" && :; then
-#					log_pass "[root] change shell to $fish_path successfully"
-#				fi
-#			fi
-#		fi
-#    else
-#        log_fail "$fish_path: invalid path"
-#        exit 1
-#    fi
-#fi
+# Assign fish as a login shell
+if ! contains "${SHELL:-}" "fish"; then
+    fish_path="$(which fish)"
+
+    if [ -x "$fish_path" ]; then
+        if has "chsh"; then
+			# Changing for a general user
+
+			if chsh -s "$fish_path" "${USER:-root}"; then
+				log_pass "Change shell to $fish_path for ${USER:-root} successfully"
+			else
+				log_fail "cannot set '$path' as \$SHELL"
+				log_fail "Is '$path' described in /etc/shells?"
+				log_fail "you should run 'chsh -l' now"
+				exit 1
+			fi
+
+			# For root user
+			if [ ${EUID:-${UID}} = 0 ]; then
+				if chsh -s "$fish_path" && :; then
+					log_pass "[root] change shell to $fish_path successfully"
+				fi
+			fi
+		fi
+    else
+        log_fail "$fish_path: invalid path"
+        exit 1
+    fi
+fi
