@@ -23,10 +23,10 @@ if ! has "fisher"; then
         # Case of OS X
         osx)
             if has "brew"; then
-                log_echo "Install fish with Homebrew"
-                brew install fish
+                log_echo "Install fisher with Homebrew"
+                brew install fisher
             elif "port"; then
-                log_echo "Install fish with MacPorts"
+                log_echo "Install fisher with MacPorts"
                 sudo port install fish-devel
             else
                 log_fail "error: require: Homebrew or MacPorts"
@@ -37,17 +37,17 @@ if ! has "fisher"; then
         # Case of Linux
         linux)
             if has "yum"; then
-                log_echo "Install fish with Yellowdog Updater Modified"
-                sudo yum -y install fish
+                log_echo "Install fisher with Yellowdog Updater Modified"
+                sudo yum -y install fisher
             elif has "apt-get"; then
-                log_echo "Install fish with Advanced Packaging Tool"
-                sudo apt-get -y install fish
+                log_echo "Install fisher with Advanced Packaging Tool"
+                sudo apt-get -y install fisher
             elif has "apk"; then
-                log_echo "Install fish with apk"
-                sudo apk -y add --no-cache fish
+                log_echo "Install fisher with apk"
+                sudo apk -y add --no-cache fisher
 			elif has "pacman"; then
-                log_echo "Install fish with pacman"
-				pacman -S --noconfirm fish
+                log_echo "Install fisher with pacman"
+				pacman -S --noconfirm fisher
             else
                 log_fail "error: require: YUM, APT, APK or PACMAN"
                 exit 1
