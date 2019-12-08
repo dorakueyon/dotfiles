@@ -9,12 +9,16 @@ set -eu
 # For more information, see etc/README.md
 . "$DOTPATH"/etc/lib/vital.sh
 
-# If you don't have Z shell or don't find fish preserved
+if ! has "fish"; then
+     log_fail "error: require: fish"
+     exit 1
+fi
+
+# If you don't have find fish preserved
 # in a directory with the path,
 # to install it after the platforms are detected
-if ! has "fish"; then
-
-    # Install fish
+if ! has "fisher"; then
+    # Install fisher
     case "$(get_os)" in
         # Case of OS X
         osx)
@@ -56,36 +60,5 @@ if ! has "fish"; then
             exit 1
             ;;
     esac
-fi
-# Run the forced termination with a last exit code
-#exit $?
 
-# Assign fish as a login shell
-if ! contains "${SHELL:-}" "fish"; then
-    fish_path="$(which fish)"
-
-    if [ -x "$fish_path" ]; then
-        if has "chsh"; then
-			# Changing for a general user
-
-			if chsh -s "$fish_path" "${USER:-root}"; then
-				log_pass "Change shell to $fish_path for ${USER:-root} successfully"
-			else
-				log_fail "cannot set '$path' as \$SHELL"
-				log_fail "Is '$path' described in /etc/shells?"
-				log_fail "you should run 'chsh -l' now"
-				exit 1
-			fi
-
-			# For root user
-			if [ ${EUID:-${UID}} = 0 ]; then
-				if chsh -s "$fish_path" && :; then
-					log_pass "[root] change shell to $fish_path successfully"
-				fi
-			fi
-		fi
-    else
-        log_fail "$fish_path: invalid path"
-        exit 1
-    fi
 fi

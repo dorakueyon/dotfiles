@@ -6,10 +6,10 @@ set -eu
 
 . "$DOTPATH"/etc/lib/vital.sh
 
-# The script is dependent on python
-if ! has "python"; then
-    log_fail "error: require: python"
-    exit 1
-fi
+## The script is dependent on python
+#if ! has "python"; then
+#    log_fail "error: require: python"
+#    exit 1
+#fi
 
 
