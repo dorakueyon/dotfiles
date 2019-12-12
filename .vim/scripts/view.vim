@@ -184,42 +184,42 @@ function! GuiTabLabel() "{{{3
 endfunction "}}}
 
 " Emphasize statusline in the insert mode {{{1
-if !g:plug.is_installed('lightline.vim')
-    augroup colorize-statusline-insert
-        autocmd!
-        autocmd InsertEnter * call s:colorize_statusline_insert('Enter')
-        autocmd InsertLeave * call s:colorize_statusline_insert('Leave')
-    augroup END
-
-    function! ReverseHighlight(hi)
-        let hl = a:hi
-        let hl = substitute(hl, 'fg', 'swp', 'g')
-        let hl = substitute(hl, 'bg', 'fg',  'g')
-        let hl = substitute(hl, 'swp', 'bg', 'g')
-        return hl
-    endfunction
-    function! GetHighlight(hi)
-        redir => hl
-        silent execute 'highlight ' . a:hi
-        redir END
-        return substitute(hl, '.*xxx ', '', '')
-    endfunction
-
-    let s:hi_insert = 'highlight StatusLine ' . ReverseHighlight(GetHighlight('ModeMsg'))
-    let s:slhlcmd = ''
-
-    function! s:colorize_statusline_insert(mode)
-        if a:mode == 'Enter'
-            let s:slhlcmd = 'highlight StatusLine ' . GetHighlight('StatusLine')
-            silent execute s:hi_insert
-
-        elseif a:mode == 'Leave'
-            highlight clear StatusLine
-            silent execute s:slhlcmd
-        endif
-    endfunction
-
-endif
+"if !g:plug.is_installed('lightline.vim')
+"    augroup colorize-statusline-insert
+"        autocmd!
+"        autocmd InsertEnter * call s:colorize_statusline_insert('Enter')
+"        autocmd InsertLeave * call s:colorize_statusline_insert('Leave')
+"    augroup END
+"
+"    function! ReverseHighlight(hi)
+"        let hl = a:hi
+"        let hl = substitute(hl, 'fg', 'swp', 'g')
+"        let hl = substitute(hl, 'bg', 'fg',  'g')
+"        let hl = substitute(hl, 'swp', 'bg', 'g')
+"        return hl
+"    endfunction
+"    function! GetHighlight(hi)
+"        redir => hl
+"        silent execute 'highlight ' . a:hi
+"        redir END
+"        return substitute(hl, '.*xxx ', '', '')
+"    endfunction
+"
+"    let s:hi_insert = 'highlight StatusLine ' . ReverseHighlight(GetHighlight('ModeMsg'))
+"    let s:slhlcmd = ''
+"
+"    function! s:colorize_statusline_insert(mode)
+"        if a:mode == 'Enter'
+"            let s:slhlcmd = 'highlight StatusLine ' . GetHighlight('StatusLine')
+"            silent execute s:hi_insert
+"
+"        elseif a:mode == 'Leave'
+"            highlight clear StatusLine
+"            silent execute s:slhlcmd
+"        endif
+"    endfunction
+"
+"endif
 
 " Cursor line/column {{{1
 set cursorline

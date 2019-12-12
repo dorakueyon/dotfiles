@@ -40,9 +40,13 @@
     # `git config --global push.default simple`. See http://git.io/mMah-w.
     default = matching
 
+#[user]
+#    name  = dorakueyon
+#    email = matthew.at.muse@gmail.com
+
 [user]
-    name  = dorakueyon
-    email = matthew.at.muse@gmail.com
+    name  = YoheiIguchi
+    email = yiguchi@r.recruit.co.jp
 
 [pager]
     log  = diff-highlight | less -RX
