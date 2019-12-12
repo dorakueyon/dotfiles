@@ -82,7 +82,7 @@ fi
 alias vi="vim"
 
 # Use plain vim.
-alias nvim='vim -N -u NONE -i NONE'
+# alias nvim='vim -N -u NONE -i NONE'
 
 # The first word of each simple command, if unquoted, is checked to see 
 # if it has an alias. [...] If the last character of the alias value is 
@@ -465,6 +465,12 @@ git_modified_files() {
         esac
     done
 }
+
+open_git_page(){
+	#$git_path='find ~/src -follow  -maxdepth 3 -mindepth 3 -type d|fzf | cut -d "/" -f 6,7'
+	res=($('find ~/src -follow  -maxdepth 3 -mindepth 3 -type d | fzf'))
+}
+
 #alias -g GG='$(git_modified_files)'
 alias ls='gls --color=auto -F'
 
