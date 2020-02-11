@@ -53,7 +53,7 @@ if g:plug.ready() && g:env.vimrc.plugin_on
     Plug 'mattn/sonictemplate-vim'
 
     " syntax? language support
-    Plug 'fatih/vim-go', { 'for': 'go' }
+    Plug 'fatih/vim-go', { 'for' : 'go', 'do': ':GoUpdateBinaries' }
     Plug 'jnwhiteh/vim-golang', { 'for': 'go' }
     Plug 'posva/vim-vue'
     Plug 'hashivim/vim-terraform', { 'for': 'tf' }

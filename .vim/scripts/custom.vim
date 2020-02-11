@@ -23,6 +23,11 @@ if g:plug.is_installed('emmet') "{{{1
     let g:user_emmet_leader_key='<C-t>'
 endif
 
+if g:plug.is_installed('vim-go') "{{{1
+    let g:go_fmt_command = "goimports"
+    let g:go_metalinter_autosave = 1
+endif
+
 if g:plug.is_installed('anzu') "{{{1
     nmap n <Plug>(anzu-n)
     nmap N <Plug>(anzu-N)
