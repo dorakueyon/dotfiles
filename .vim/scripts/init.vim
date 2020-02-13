@@ -1,5 +1,6 @@
 " Tiny vim
 if 0 | endif
+finish
 
 " Use plain vim
 " when vim was invoked by 'sudo' command
@@ -109,7 +110,6 @@ call s:load('command.vim')
 call s:load('utils.vim')
 call s:load('option.vim')
 call s:load('gui.vim', g:env.is_gui)
-"call s:load('original.vim')
 
 " Must be written at the last.  see :help 'secure'.
 set secure

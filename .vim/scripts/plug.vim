@@ -44,32 +44,23 @@ if g:plug.ready() && g:env.vimrc.plugin_on
     Plug 'raphael/vim-present-simple'
     Plug 'mattn/webapi-vim'
     Plug 'b4b4r07/vim-crowi'
-    Plug 'scrooloose/nerdtree'
-    Plug 'Yggdroot/indentLine'
-    Plug 'airblade/vim-gitgutter'
-    Plug 'tpope/vim-fugitive'
-    Plug 'mattn/emmet-vim'
-    Plug 'majutsushi/tagbar'
-    Plug 'mattn/sonictemplate-vim'
 
     " syntax? language support
-    Plug 'fatih/vim-go', { 'for' : 'go', 'do': ':GoUpdateBinaries' }
+    Plug 'fatih/vim-go', { 'for': 'go' }
     Plug 'jnwhiteh/vim-golang', { 'for': 'go' }
-    Plug 'posva/vim-vue'
-    Plug 'hashivim/vim-terraform', { 'for': 'tf' }
-    Plug 'hashivim/vim-terraform', { 'for': 'tfvars' }
     "Plug 'zaiste/tmux.vim', { 'for': 'tmux' }
     Plug 'keith/tmux.vim', { 'for': 'tmux' }
     Plug 'dag/vim-fish', { 'for': 'fish' }
     Plug 'zplug/vim-zplug', { 'for': 'zplug' }
     Plug 'chase/vim-ansible-yaml'
-"    Plug 'evanmiller/nginx-vim-syntax', { 'for': 'nginx' }
+    Plug 'evanmiller/nginx-vim-syntax', { 'for': 'nginx' }
     Plug 'cespare/vim-toml', { 'for': 'toml' }
     Plug 'elzr/vim-json', { 'for': 'json' }
     Plug 'b4b4r07/vim-ltsv', { 'for': 'ltsv' }
     Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
     Plug 'maksimr/vim-jsbeautify', { 'for': 'javascript' }
     Plug 'zplug/vim-zplug', { 'for': 'zplug' }
+    Plug 'rhysd/vim-fixjson', { 'for': 'json' }
     Plug 'raphael/vim-present-simple'
     Plug 'mattn/webapi-vim'
     Plug 'b4b4r07/vim-crowi'
@@ -78,12 +69,18 @@ if g:plug.ready() && g:env.vimrc.plugin_on
     Plug 'kylef/apiblueprint.vim'
     Plug 'millermedeiros/vim-esformatter'
     Plug 'juvenn/mustache.vim'
-    Plug 'posva/vim-vue', { 'for': 'javascript' }
-    Plug 'leafgarland/typescript-vim'
+    Plug 'juliosueiras/vim-terraform-completion'
+    " (Optional) Enable terraform plan to be include in filter
+    let g:syntastic_terraform_tffilter_plan = 1
+    " (Optional) Default: 0, enable(1)/disable(0) plugin's keymapping
+    let g:terraform_completion_keys = 1
+    " (Optional) Default: 1, enable(1)/disable(0) terraform module registry completion
+    let g:terraform_registry_module_completion = 0
 
-    " lint for javascript
-    Plug 'w0rp/ale', { 'for': 'javascript' }
+    Plug '/Users/b4b4r07/src/github.com/b4b4r07/vim-spacing'
 
+    Plug 'b4b4r07/vim-ansible-vault'
+    Plug 'christianrondeau/vim-base64'
 
     " colorscheme
     Plug 'b4b4r07/solarized.vim'
@@ -94,17 +91,22 @@ if g:plug.ready() && g:env.vimrc.plugin_on
 
     Plug 'plasticboy/vim-markdown',      { 'for': 'markdown' }
     Plug 'shawncplus/phpcomplete.vim'
-""    Plug 'm2mdas/phpcomplete-extended'
+    Plug 'm2mdas/phpcomplete-extended'
 
     Plug 'b4b4r07/vim-unicode'
     Plug 'b4b4r07/vim-sqlfmt'
     Plug 'lepture/vim-jinja'
     Plug 'mattn/gist-vim'
 
-    Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
+    " Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
+    Plug 'stamblerre/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
     Plug 'cocopon/vaffle.vim'
     Plug 'hotwatermorning/auto-git-diff'
     Plug 'lambdalisue/vim-gista'
+    Plug 'aliou/bats.vim'
+    Plug 'chrisbra/csv.vim'
+
+    Plug 'w0rp/ale'
 
     " Add plugins to &runtimepath
     call plug#end()

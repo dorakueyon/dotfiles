@@ -11,23 +11,6 @@ if g:plug.is_installed('caw') "{{{1
     vmap K     <Plug>(caw:i:toggle)
 endif
 
-if g:plug.is_installed('nerdtree') "{{{1
-    nnoremap <silent><C-e> :NERDTreeToggle<CR>
-endif
-
-if g:plug.is_installed('indentLine') "{{{1
-    let g:indentLine_char = '¦'
-endif
-
-if g:plug.is_installed('emmet') "{{{1
-    let g:user_emmet_leader_key='<C-t>'
-endif
-
-if g:plug.is_installed('vim-go') "{{{1
-    let g:go_fmt_command = "goimports"
-    let g:go_metalinter_autosave = 1
-endif
-
 if g:plug.is_installed('anzu') "{{{1
     nmap n <Plug>(anzu-n)
     nmap N <Plug>(anzu-N)
@@ -528,12 +511,6 @@ endif
 
 if g:plug.is_installed('') " {{{1
 endif
-
-if g:plug.is_installed('sonictemplate-vim') "{{{1
-    let g:sonictemplate_vim_template_dir = [ '~/.vim/template']
-endif
-
-
 
 " __END__ {{{1
 " vim:fdm=marker expandtab fdc=3:
