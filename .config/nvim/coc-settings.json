@@ -23,8 +23,8 @@
       ],
       "initializationOptions": {
         "iskeyword": "vim iskeyword option",
-        "vimruntime": "path/to/$VIMRUNTIME",
-        "runtimepath": "vim/runtime/path",
+        "vimruntime": "",
+        "runtimepath": "",
         "diagnostic": {
           "enable": true
         }
