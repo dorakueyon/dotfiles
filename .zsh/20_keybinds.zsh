@@ -1,59 +1,52 @@
-# Check whether the vital file is loaded
-if ! vitalize 2>/dev/null; then
-    echo "cannot run as shell script" 1>&2
-    return 1
-fi
-
 # Vim-like keybind as default
 bindkey -v
 # Vim-like escaping jj keybind
 bindkey -M viins 'jj' vi-cmd-mode
 
 # Add emacs-like keybind to viins mode
-bindkey -M viins '^F'    forward-char
-bindkey -M viins '^B'    backward-char
-bindkey -M viins '^P'    up-line-or-history
-bindkey -M viins '^N'    down-line-or-history
-bindkey -M viins '^A'    beginning-of-line
-bindkey -M viins '^E'    end-of-line
-bindkey -M viins '^K'    kill-line
-bindkey -M viins '^R'    history-incremental-pattern-search-backward
-bindkey -M viins '\er'   history-incremental-pattern-search-forward
-bindkey -M viins '^Y'    yank
-bindkey -M viins '^W'    backward-kill-word
-bindkey -M viins '^U'    backward-kill-line
-bindkey -M viins '^H'    backward-delete-char
-bindkey -M viins '^?'    backward-delete-char
-bindkey -M viins '^G'    send-break
-bindkey -M viins '^D'    delete-char-or-list
+bindkey -M viins '^F'  forward-char
+bindkey -M viins '^B'  backward-char
+# bindkey -M viins '^P'  up-line-or-history
+# bindkey -M viins '^N'  down-line-or-history
+bindkey -M viins '^A'  beginning-of-line
+bindkey -M viins '^E'  end-of-line
+bindkey -M viins '^K'  kill-line
+# bindkey -M viins '^R'  history-incremental-pattern-search-backward
+# bindkey -M viins '\er' history-incremental-pattern-search-forward
+bindkey -M viins '^Y'  yank
+bindkey -M viins '^W'  backward-kill-word
+bindkey -M viins '^U'  backward-kill-line
+bindkey -M viins '^H'  backward-delete-char
+bindkey -M viins '^?'  backward-delete-char
+bindkey -M viins '^G'  send-break
+bindkey -M viins '^D'  delete-char-or-list
 
-bindkey -M vicmd '^A'    beginning-of-line
-bindkey -M vicmd '^E'    end-of-line
-bindkey -M vicmd '^K'    kill-line
-bindkey -M vicmd '^P'    up-line-or-history
-bindkey -M vicmd '^N'    down-line-or-history
-bindkey -M vicmd '^Y'    yank
-bindkey -M vicmd '^W'    backward-kill-word
-bindkey -M vicmd '^U'    backward-kill-line
-bindkey -M vicmd '/'     vi-history-search-forward
-bindkey -M vicmd '?'     vi-history-search-backward
+bindkey -M vicmd '^A'  beginning-of-line
+bindkey -M vicmd '^E'  end-of-line
+bindkey -M vicmd '^K'  kill-line
+bindkey -M vicmd '^P'  up-line-or-history
+bindkey -M vicmd '^N'  down-line-or-history
+bindkey -M vicmd '^Y'  yank
+bindkey -M vicmd '^W'  backward-kill-word
+bindkey -M vicmd '^U'  backward-kill-line
+bindkey -M vicmd '/'   vi-history-search-forward
+bindkey -M vicmd '?'   vi-history-search-backward
 
-# Original keybind
-#
 bindkey -M vicmd 'gg' beginning-of-line
 bindkey -M vicmd 'G'  end-of-line
 
 if is-at-least 5.0.8; then
-    #autoload -Uz surround
-    #zle -N delete-surround surround
-    #zle -N change-surround surround
-    #zle -N add-surround surround
-    #bindkey -a cs change-surround
-    #bindkey -a ds delete-surround
-    #bindkey -a ys add-surround
-    #bindkey -a S add-surround
+    autoload -Uz surround
+    zle -N delete-surround surround
+    zle -N change-surround surround
+    zle -N add-surround surround
+    bindkey -a cs change-surround
+    bindkey -a ds delete-surround
+    bindkey -a ys add-surround
+    bindkey -a S add-surround
 fi
 
+if false; then
 # bind P and N for EMACS mode
 has 'history-substring-search-up' &&
     bindkey -M emacs '^P' history-substring-search-up
@@ -71,6 +64,7 @@ has 'history-substring-search-up' &&
     bindkey '^P' history-substring-search-up
 has 'history-substring-search-down' &&
     bindkey '^N' history-substring-search-down
+fi
 
 # Insert a last word
 zle -N insert-last-word smart-insert-last-word
@@ -133,35 +127,8 @@ _peco-select-history() {
         fi
     fi
 }
-zle -N _peco-select-history
-bindkey '^r' _peco-select-history
-
-_peco-tmuxinator() {
-    local sql
-    sql="$(
-    {
-        tmuxinator completions start | sed 's/\(.*\)/\1: project name/'
-        tmuxinator commands zsh | sed 's/:/: /'
-    } | perl -pe 's/^(.*):/\033[31m$1:\033[m/' \
-        | fzf --ansi \
-        | awk -F: '{print $1}'
-    )"
-
-    local current_session
-    current_session="$(tmux display-message -p '#S')"
-    if contains "$(tmuxinator completions start)"  "$current_session"; then
-        echo "$current_session: is running now!" 1>&2
-        exit 1
-    fi
-
-    if [ -n "$sql" ]; then
-        RBUFFER="tmuxinator $sql"
-        CURSOR=$#BUFFER
-        zle accept-line
-    fi
-}
-#zle -N _peco-tmuxinator
-#bindkey '^X' _peco-tmuxinator
+# zle -N _peco-select-history
+# bindkey '^r' _peco-select-history
 
 _start-tmux-if-it-is-not-already-started() {
     BUFFER="${${${(M)${+commands[tmuxx]}#1}:+tmuxx}:-tmux}"
@@ -182,14 +149,27 @@ do-enter() {
         return $status
     fi
 
+    : ${ls_done:=false}
+    : ${git_ls_done:=false}
+
+    if [[ $PWD != $GIT_OLDPWD ]]; then
+        git_ls_done=false
+    fi
+
     echo
     if is_git_repo; then
-        if [[ -n "$(git status --short)" ]]; then
-            git status
+        if $git_ls_done; then
+            if [[ -n $(git status --short) ]]; then
+                git status
+            fi
+        else
+            ${=aliases[ls]} && git_ls_done=true
+            GIT_OLDPWD=$PWD
         fi
     else
-        # do anything
-        : ls
+        if [[ $PWD != $OLDPWD ]] && ! $ls_done; then
+            ${=aliases[ls]} && ls_done=true
+        fi
     fi
 
     zle reset-prompt
@@ -266,3 +246,17 @@ exec-oneliner() {
 }
 zle -N exec-oneliner
 bindkey '^x^x' exec-oneliner
+
+# expand global aliases by space
+# http://blog.patshead.com/2012/11/automatically-expaning-zsh-global-aliases---simplified.html
+globalias() {
+  if [[ $LBUFFER =~ ' [A-Z0-9]+$' ]]; then
+    zle _expand_alias
+    # zle expand-word
+  fi
+  zle self-insert
+}
+
+zle -N globalias
+
+# bindkey " " globalias

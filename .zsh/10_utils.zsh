@@ -1,86 +1,9 @@
+autoload -Uz colors; colors
+export PATH=~/bin:$PATH
+export PATH=$PATH:/usr/local/go/bin
 
-# Check whether the vital file is loaded
-if ! vitalize 2>/dev/null; then
-    echo "cannot run as shell script" 1>&2
-    return 1
-fi
-
-# has_command returns true if $1 as a shell command exists
-has.command() {
-    (( $+commands[${1:?too few argument}] ))
-    return $status
-}
-
-# has_command returns true if $1 as a shell function exists
-has.function() {
-    (( $+functions[${1:?too few argument}] ))
-    return $status
-}
-
-# has_command returns true if $1 as a builtin command exists
-has.builtin() {
-    (( $+builtins[${1:?too few argument}] ))
-    return $status
-}
-
-# has_command returns true if $1 as an alias exists
-has.alias() {
-    (( $+aliases[${1:?too few argument}] ))
-    return $status
-}
-
-# has_command returns true if $1 as an alias exists
-has.galias() {
-    (( $+galiases[${1:?too few argument}] ))
-    return $status
-}
-
-# has returns true if $1 exists
 has() {
-    has.function "$1" || \
-        has.command "$1" || \
-        has.builtin "$1" || \
-        has.alias "$1" || \
-        has.galias "$1"
-
-    return $status
-}
-
-# zload is a helper function to autoload
-# Example 1 : zload ~/work/function/_f
-# Example 2 : zload *
-# thanks @mollifier
-zload() {
-    if [[ $# -le 0 ]]; then
-        echo "Usage: $0 PATH..." 1>&2
-        echo "Load specified files as an autoloading function" 1>&2
-        return 1
-    fi
-
-    local file function_path function_name
-    for file in "$@"
-    do
-        if [[ -z $file ]]; then
-            continue
-        fi
-
-        function_path="${file:h}"
-        function_name="${file:t}"
-
-        if (( $+functions[$function_name] )); then
-            # "function_name" is defined
-            unfunction "$function_name"
-        fi
-        FPATH="$function_path" autoload -Uz +X "$function_name"
-
-        if [[ $function_name == _* ]]; then
-            # "function_name" is a completion script
-
-            # fpath requires absolute path
-            # convert relative path to absolute path with :a modifier
-            fpath=("${function_path:a}" $fpath) compinit
-        fi
-    done
+    type "${1:?too few arguments}" &>/dev/null
 }
 
 # reload resets Completion function
@@ -91,15 +14,110 @@ reload() {
     autoload -U $f:t
 }
 
-# chpwd function is called after cd command
-chpwd() {
-    ls -F
+# is_login_shell returns true if current shell is first shell
+is_login_shell() {
+    [[ $SHLVL == 1 ]]
 }
 
-256colortest() {
-    local code
-    for code in {0..255}
-    do
-        echo -e "\e[38;05;${code}m $code: Test"
+# is_git_repo returns true if cwd is in git repository
+is_git_repo() {
+    git rev-parse --is-inside-work-tree &>/dev/null
+    return $status
+}
+
+# is_screen_running returns true if GNU screen is running
+is_screen_running() {
+    [[ -n $STY ]]
+}
+
+# is_tmux_runnning returns true if tmux is running
+is_tmux_runnning() {
+    [[ -n $TMUX ]]
+}
+
+# is_screen_or_tmux_running returns true if GNU screen or tmux is running
+is_screen_or_tmux_running() {
+    is_screen_running || is_tmux_runnning
+}
+
+# shell_has_started_interactively returns true if the current shell is
+# running from command line
+shell_has_started_interactively() {
+    [[ -n $PS1 ]]
+}
+
+# is_ssh_running returns true if the ssh deamon is available
+is_ssh_running() {
+    [[ -n $SSH_CLIENT ]]
+}
+
+# ostype returns the lowercase OS name
+ostype() {
+    echo ${(L):-$(uname)}
+}
+
+# os_detect export the PLATFORM variable as you see fit
+os_detect() {
+    export PLATFORM
+    case "$(ostype)" in
+        *'linux'*)  PLATFORM='linux'   ;;
+        *'darwin'*) PLATFORM='osx'     ;;
+        *'bsd'*)    PLATFORM='bsd'     ;;
+        *)          PLATFORM='unknown' ;;
+    esac
+}
+
+# is_osx returns true if running OS is Macintosh
+is_osx() {
+    # os_detect
+    if [[ $PLATFORM == "osx" ]]; then
+        return 0
+    else
+        return 1
+    fi
+}
+alias is_mac=is_osx
+
+# is_linux returns true if running OS is GNU/Linux
+is_linux() {
+    # os_detect
+    if [[ $PLATFORM == "linux" ]]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+# is_bsd returns true if running OS is FreeBSD
+is_bsd() {
+    # os_detect
+    if [[ $PLATFORM == "bsd" ]]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+# get_os returns OS name of the platform that is running
+get_os() {
+    local os
+    for os in osx linux bsd; do
+        if is_$os; then
+            echo $os
+        fi
     done
+}
+
+sa() {
+    gcloud beta iam service-accounts list \
+        | sed '1d' \
+        | awk '{print $NF}' \
+        | perl -pe "s/^(.*?)(@.*)$/$fg[red]\$1$reset_color\$2/"
+}
+
+has_sa() {
+    gcloud beta iam service-accounts list \
+        | sed '1d' \
+        | awk '{print $NF}' \
+        | grep -i "${1:?}"
 }

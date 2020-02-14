@@ -1,48 +1,7 @@
-month=`date "+%b"`
-
-alias google="vi ~/Dropbox/Projects/google-interview-university/README.md"
-alias machine="vi ~/Dropbox/Projects/machine-learning-for-software-engineers/README.md"
-# alias ls="ls -GF"
-# alias gls="gls --color"
-
-alias cd="cdls"
-alias vim="reattach-to-user-namespace vim"
-alias vi="reattach-to-user-namespace vim"
-
-# easy way to browse projects listed under ghq
-alias g='cd $(find ~/src -follow  -maxdepth 3 -mindepth 3 -type d|fzf)'
-alias gh='hub browse $(find ~/src -follow  -maxdepth 3 -mindepth 3 -type d | cut -d "/" -f 5- | fzf | cut -d "/" -f 2,3)'
-alias ghe='GITHUB_HOST=ghe.kst3.jp hub browse $(find ~/src -follow  -maxdepth 3 -mindepth 3 -type d | cut -d "/" -f 5- | fzf | cut -d "/" -f 2,3)'
-alias ctags="`brew --prefix`/bin/ctags"
-
-cdls ()
-{
-  \cd "$@" && gls --color=auto -F
-}
-
-# Check whether the vital file is loaded
-if ! vitalize 2>/dev/null; then
-    echo "cannot run as shell script" 1>&2
-    return 1
-fi
-
-alias p="print -l"
-
-# For mac, aliases
-if is_osx; then
-    has "qlmanage" && alias ql='qlmanage -p "$@" >&/dev/null'
-fi
-
-if has 'git'; then
-    alias gst='git status'
-fi
-
-if has 'richpager'; then
-    alias cl='richpager'
-fi
-
 # Common aliases
 alias ..='cd ..'
+
+alias ll="ls -l"
 alias ld='ls -ld'          # Show info about the directory
 alias lla='ls -lAF'        # Show hidden all files
 alias ll='ls -lF'          # Show long file information
@@ -53,11 +12,6 @@ alias lc='ls -ltcr'        # Sort by and show change time, most recent last
 alias lu='ls -ltur'        # Sort by and show access time, most recent last
 alias lt='ls -ltr'         # Sort by date, most recent last
 alias lr='ls -lR'          # Recursive ls
-alias pbc='pbcopy'         # copy to clipboard
-alias pwdc='pwd | pbcopy'  # copy currect directory path to clipboard
-
-# The ubiquitous 'll': directories first, with alphanumeric sorting:
-#alias ll='ls -lv --group-directories-first'
 
 alias cp="${ZSH_VERSION:+nocorrect} cp -i"
 alias mv="${ZSH_VERSION:+nocorrect} mv -i"
@@ -72,23 +26,28 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-# Use if colordiff exists
-if has 'colordiff'; then
-    alias diff='colordiff -u'
-else
-    alias diff='diff -u'
-fi
-
 alias vi="vim"
 
 # Use plain vim.
 # alias nvim='vim -N -u NONE -i NONE'
 
-# The first word of each simple command, if unquoted, is checked to see 
-# if it has an alias. [...] If the last character of the alias value is 
-# a space or tab character, then the next command word following the 
+# easy way to browse projects listed under ghq
+alias g='cd $(find ~/src -follow  -maxdepth 3 -mindepth 3 -type d|fzf)'
+alias gh='hub browse $(find ~/src -follow  -maxdepth 3 -mindepth 3 -type d | cut -d "/" -f 5- | fzf | cut -d "/" -f 2,3)'
+alias ghe='GITHUB_HOST=ghe.kst3.jp hub browse $(find ~/src -follow  -maxdepth 3 -mindepth 3 -type d | cut -d "/" -f 5- | fzf | cut -d "/" -f 2,3)'
+
+if (( $+commands[kubectl] )); then
+    alias k=kubectl
+fi
+
+# The first word of each simple command, if unquoted, is checked to see
+# if it has an alias. [...] If the last character of the alias value is
+# a space or tab character, then the next command word following the
 # alias is also checked for alias expansion
 alias sudo='sudo '
+if is_osx; then
+    alias sudo="${ZSH_VERSION:+nocorrect} sudo "
+fi
 
 # Global aliases
 alias -g G='| grep'
@@ -102,6 +61,7 @@ alias -g N=" >/dev/null 2>&1"
 alias -g N1=" >/dev/null"
 alias -g N2=" 2>/dev/null"
 alias -g VI='| xargs -o vim'
+alias -g CSV="| sed 's/,,/, ,/g;s/,,/, ,/g' | column -s, -t"
 
 multi_grep() {
     local std_in="$(cat <&0)" word
@@ -122,7 +82,8 @@ if has "emojify"; then
 fi
 
 if has "jq"; then
-    alias -g J='| jq .'
+    alias -g JQ='| jq -C .'
+    alias -g JL='| jq -C . | less -R -X'
 fi
 
 if is_osx; then
@@ -144,7 +105,8 @@ cat_alias() {
         echo "${(F)stdin}"
     fi
 }
-alias -g C="| cat_alias"
+# alias -g C="| cat_alias"
+alias -g CP="| pbcopy"
 
 # less
 alias -g L="| cat_alias | less"
@@ -192,12 +154,36 @@ awk_alias() {
         shift
     done
 
-    if ! awk ${=opts[@]} "$pattern{print $"$field"}" 2>/dev/null; then
+    if ! awk ${=opts[@]} "$"$field" ~ $pattern{print $"$field"}" 2>/dev/null; then
         printf "Galias: syntax error\n"
         return 1
     fi
 }
-alias -g A="| awk_alias"
+
+awk_alias2() {
+    local -a options fields words
+    while (( $#argv > 0 ))
+    do
+        case "$1" in
+            -*)
+                options+=("$1")
+                ;;
+            <->)
+                fields+=("$1")
+                ;;
+            *)
+                words+=("$1")
+                ;;
+        esac
+        shift
+    done
+    if (( $#fields > 0 )) && (( $#words > 0 )); then
+        awk '$'$fields[1]' ~ '${(qqq)words[1]}''
+    elif (( $#fields > 0 )) && (( $#words == 0 )); then
+        awk '{print $'$fields[1]'}'
+    fi
+}
+alias -g A="| awk_alias2"
 
 mru() {
     local -a f1 f2 f2_backup
@@ -235,6 +221,7 @@ mru() {
                 cat <<HELP > /dev/tty
 usage: vim_mru_files
     list up most recently files
+
 keybind:
   ctrl-q  output files and quit
   ctrl-l  less files under the cursor
@@ -395,11 +382,11 @@ if has "gomi"; then
 fi
 
 # finder
-alias f='fzf \
-    --bind="ctrl-l:execute(less {})" \
-    --bind="ctrl-h:execute(ls -l {} | less)" \
-    --bind="ctrl-v:execute(vim {})"'
-alias -g F='$(f)'
+# alias f='fzf \
+#     --bind="ctrl-l:execute(less {})" \
+#     --bind="ctrl-h:execute(ls -l {} | less)" \
+#     --bind="ctrl-v:execute(vim {})"'
+# alias -g F='$(f)'
 
 # list galias
 alias galias="alias | command grep -E '^[A-Z]'"
@@ -427,62 +414,89 @@ if has "tw"; then
     fi
 fi
 
-git_modified_files() {
-    is_git_repo || return
+alias -g P='$(kubectl get pods | fzf-tmux --header-lines=1 --reverse --multi --cycle | awk "{print \$1}")'
+alias -g F='| fzf --height 30 --reverse --multi --cycle'
+alias -g J='| jq -C . | less -F'
 
-    local cmd q k res ok
-    while ok=("${ok[@]:-dummy_$RANDOM}"); cmd="$(
-        git status --po \
-            | awk '$1=="M"{print $2}' \
-            | FZF_DEFAULT_OPTS= fzf --ansi --multi --query="$@" \
-            --no-sort --prompt="[C-a:add | C-c:checkout | C-d:diff]> " \
-            --print-query --expect=ctrl-d,ctrl-a,ctrl-c \
-            --bind=ctrl-z:toggle-all \
-            )"; do
-        q="$(head -1 <<< "$cmd")"
-        k="$(head -2 <<< "$cmd" | tail -1)"
-        res="$(sed '1,2d;/^$/d' <<< "$cmd")"
-        [ -z "$res" ] && continue
-        case "$k" in
-            ctrl-c)
-                if [[ ${(j: :)ok} == ${(j: :)${(@f)res}} ]]; then
-                    git checkout -- "${(@f)res}"
-                    ok=()
-                else
-                    ok=("${(@f)res}")
-                fi
-                ;;
-            ctrl-a)
-                git add "${(@f)res}"
-                ;;
-            ctrl-d)
-                git diff "${(@f)res}" < /dev/tty > /dev/tty
-                ;;
-            *)
-                echo "${(@f)res}" < /dev/tty > /dev/tty
-                break
-                ;;
-        esac
-    done
+function filetime() {
+    zmodload "zsh/stat"
+    zmodload "zsh/datetime"
+    strftime "%F %T" "$(stat +mtime "${1:?}")"
 }
 
-open_git_page(){
-	#$git_path='find ~/src -follow  -maxdepth 3 -mindepth 3 -type d|fzf | cut -d "/" -f 6,7'
-	res=($('find ~/src -follow  -maxdepth 3 -mindepth 3 -type d | fzf'))
+function _gcloud_change_project() {
+    local proj=$(gcloud projects list | fzf --height 50% --header-lines=1 --reverse --multi --cycle | awk '{print $1}')
+    if [[ -n $proj ]]; then
+        gcloud config set project $proj
+        return $?
+    fi
+}
+alias gcp=_gcloud_change_project
+
+alias yy="fc -ln -1 | tr -d '\n' | pbcopy"
+
+if (( $+commands[iap_curl] )); then
+    alias iap='iap_curl $(iap_curl --list | fzf --height 30% --reverse)'
+fi
+
+function pet-select() {
+    BUFFER="$(pet search --color --query "$LBUFFER")"
+    CURSOR=$#BUFFER
+    zle redisplay
 }
 
-#alias -g GG='$(git_modified_files)'
-alias ls='gls --color=auto -F'
+zle -N pet-select
+bindkey '^s' pet-select
 
-# open current directory in Finder
-alias fo='open .'
+function prev-add() {
+  local PREV=$(fc -lrn | head -n 1)
+  sh -c "pet new `printf %q "$PREV"`"
+}
 
-# cd to the path of the front Finder window
-cdf() {
-  target=`osascript -e 'tell application "Finder" to if (count of Finder windows) > 0 then get POSIX path of (target of front Finder window as text)'`
-  if [ "$target" != "" ]; then
-    cd "$target"; pwd
-  else
-    echo 'No Finder window found' >&2
-  fi
+gchange() {
+    if ! type gcloud &>/dev/null; then
+        echo "gcloud not found" >&2
+        return 1
+    fi
+    gcloud config configurations activate $(gcloud config configurations list | fzf-tmux --reverse --header-lines=1 | awk '{print $1}')
+}
+
+docker-rmi() {
+    docker images \
+        | fzf-tmux --reverse --header-lines=1 --multi --ansi \
+        | awk '{print $3}' \
+        | xargs docker rmi ${1+"$@"}
+}
+
+# source <(kubectl completion zsh)
+# source <(kubectl completion zsh | sed 's/__start_kubectl kubectl/__start_kubectl kube/')
+
+review() {
+    git diff --name-only origin/master... \
+        | fzf \
+        --ansi \
+        --multi \
+        --reverse \
+        --height 70% \
+        --preview-window down:70% \
+        --preview="if [[ -f {} ]]; then git diff --color=always origin/master... {}; fi" \
+        --bind "enter:execute-silent(vim {} </dev/tty >/dev/tty)"
+}
+
+git-replace()
+{
+    case $# in
+        (0)
+            echo "too few arguments" >&2
+            return 1
+            ;;
+        (1)
+            git grep $1
+            return $?
+            ;;
+        (*)
+            git grep -l $1 | xargs -I% sd $1 $2 %
+            return $?
+            ;;
+    esac
 }
