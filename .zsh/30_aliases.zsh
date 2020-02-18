@@ -2,7 +2,7 @@ month=`date "+%b"`
 
 alias google="vi ~/Dropbox/Projects/google-interview-university/README.md"
 alias machine="vi ~/Dropbox/Projects/machine-learning-for-software-engineers/README.md"
-# alias ls="ls -GF"
+alias ls="ls --color=auto -GF"
 # alias gls="gls --color"
 
 alias cd="cdls"
@@ -17,7 +17,7 @@ alias ctags="`brew --prefix`/bin/ctags"
 
 cdls ()
 {
-  \cd "$@" && gls --color=auto -F
+  \cd "$@" && ls --color=auto -F
 }
 
 # Check whether the vital file is loaded
@@ -472,7 +472,6 @@ open_git_page(){
 }
 
 #alias -g GG='$(git_modified_files)'
-alias ls='gls --color=auto -F'
 
 # open current directory in Finder
 alias fo='open .'
