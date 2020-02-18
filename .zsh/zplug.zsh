@@ -47,10 +47,10 @@ zplug "peco/peco", \
   from:gh-r, \
   frozen:1
 
-zplug "motemen/ghq", \
-  as:command, \
-  from:gh-r, \
-  rename-to:ghq
+#zplug "motemen/ghq", \
+#  as:command, \
+#  from:gh-r, \
+#  rename-to:ghq
 
 zplug "b4b4r07/ls.zsh", \
   as:command, \
