@@ -1,9 +1,3 @@
-# Default config for sway
-#
-# Copy this to ~/.config/sway/config and edit it to your liking.
-#
-# Read `man 5 sway` for a complete reference.
-
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
@@ -14,11 +8,11 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term terminator
+set $term kitty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu dmenu_path | dmenu | xargs swaymsg exec --
+set $menu dmenu_path | rofi -dmenu | xargs swaymsg exec
 
 ### Output configuration
 #
@@ -67,7 +61,7 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
     bindsym $mod+Return exec $term
 
     # Kill focused window
-    bindsym $mod+Shift+q kill
+    bindsym $mod+q kill
 
     # Start your launcher
     bindsym $mod+d exec $menu
@@ -83,7 +77,7 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
     bindsym $mod+Shift+c reload
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+    bindsym $mod+Shift+e exec e
 #
 # Moving around:
 #
@@ -197,29 +191,29 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+include /etc/sway/config.d/*
+
 #
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
+    swaybar_command waybar
     position top
-
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1; done
-
+    font "Hack"
     colors {
-        statusline #ffffff
-        background #323232
+        statusline #e5e9f0
+        background #2e3440
         inactive_workspace #32323200 #32323200 #5c5c5c
     }
+    workspace_buttons no
 }
 
-include /etc/sway/config.d/*
-
-bar {
-    status_command i3status
-}
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+# This font is widely installed, provides lots of unicode glyphs, right-to-left
+# text rendering and scalability on retina/hidpi displays (thanks to pango).
+font pango:Noto Mono, FontAwesome 9
 
 exec mako
 
