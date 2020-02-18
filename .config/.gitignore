@@ -1,6 +1,9 @@
-configstore
-yarn
-gocode
-gatsby
-devcert
-karabiner
+/*
+/.*
+
+# white list
+!/fish/
+!/kitty/
+!/nvim/
+!/sway/
+!/waybar/
