@@ -64,6 +64,9 @@ if ! vitalize 2>/dev/null; then
   return 1
 fi
 
+# for arch linux
+export SWAYSOCK=/run/user/$(id -u)/sway-ipc.$(id -u).$(pgrep -x sway).sock
+
 # tmux_automatically_attach attachs tmux session
 # automatically when your are in zsh
 $DOTPATH/bin/tmuxx
