@@ -14,16 +14,14 @@ set $term kitty
 # on the original workspace that the command was run on.
 set $menu dmenu_path | rofi -dmenu | xargs swaymsg exec
 
+gaps inner 5
+gaps outer 0
+
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-#
-# Example configuration:
-#
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
-#
-# You can get the names of your outputs by running: swaymsg -t get_outputs
+output DP-1 resolution 2560x1440 position 1920,0
 
 ### Idle configuration
 #
@@ -216,6 +214,13 @@ bar {
 font pango:Noto Mono, FontAwesome 9
 
 exec mako
+
+# setup idle
+exec swayidle -w \
+  timeout 300 'swaylock -f -c 000000' \
+  timeout 301 'swaymsg "output * dpms off"' \
+       resume 'swaymsg "output * dpms on"' \
+  before-sleep 'swaylock -f -c 000000' \
 
 # Japanese input
 exec fcitx -r -d
