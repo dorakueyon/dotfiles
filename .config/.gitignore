@@ -3,7 +3,7 @@
 
 # white list
 !/fish/
-!/kitty/
+!/terminator/
 !/nvim/
 !/sway/
 !/waybar/
