@@ -222,6 +222,9 @@ exec swayidle -w \
        resume 'swaymsg "output * dpms on"' \
   before-sleep 'swaylock -f -c 000000' \
 
+
+bindsym $mod+x exec swaylock -f -c 000000
+
 # Japanese input
 exec fcitx -r -d
 
