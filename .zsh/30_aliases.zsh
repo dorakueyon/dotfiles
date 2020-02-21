@@ -1,7 +1,3 @@
-month=`date "+%b"`
-
-alias google="vi ~/Dropbox/Projects/google-interview-university/README.md"
-alias machine="vi ~/Dropbox/Projects/machine-learning-for-software-engineers/README.md"
 alias ls="ls --color=auto -GF"
 # alias gls="gls --color"
 
