@@ -1,21 +1,3 @@
-alias ls="ls --color=auto -GF"
-# alias gls="gls --color"
-
-alias cd="cdls"
-alias vim="reattach-to-user-namespace vim"
-alias vi="reattach-to-user-namespace vim"
-
-# easy way to browse projects listed under ghq
-alias g='cd $(find ~/src -follow  -maxdepth 3 -mindepth 3 -type d|fzf)'
-alias gh='hub browse $(find ~/src -follow  -maxdepth 3 -mindepth 3 -type d | cut -d "/" -f 5- | fzf | cut -d "/" -f 2,3)'
-alias ghe='GITHUB_HOST=ghe.kst3.jp hub browse $(find ~/src -follow  -maxdepth 3 -mindepth 3 -type d | cut -d "/" -f 5- | fzf | cut -d "/" -f 2,3)'
-alias ctags="`brew --prefix`/bin/ctags"
-
-cdls ()
-{
-  \cd "$@" && ls --color=auto -F
-}
-
 # Check whether the vital file is loaded
 if ! vitalize 2>/dev/null; then
     echo "cannot run as shell script" 1>&2
@@ -37,9 +19,12 @@ if has 'richpager'; then
     alias cl='richpager'
 fi
 
+alias ctags="`brew --prefix`/bin/ctags"
+
 # Common aliases
 alias ..='cd ..'
 
+alias ls="ls -GF"
 alias ll="ls -l"
 alias ld='ls -ld'          # Show info about the directory
 alias lla='ls -lAF'        # Show hidden all files
@@ -69,11 +54,21 @@ alias vi="vim"
 
 # Use plain vim.
 # alias nvim='vim -N -u NONE -i NONE'
+alias vim="reattach-to-user-namespace vim"
+alias vi="reattach-to-user-namespace vim"
+
 
 # easy way to browse projects listed under ghq
 alias g='cd $(find ~/src -follow  -maxdepth 3 -mindepth 3 -type d|fzf)'
 alias gh='hub browse $(find ~/src -follow  -maxdepth 3 -mindepth 3 -type d | cut -d "/" -f 5- | fzf | cut -d "/" -f 2,3)'
 alias ghe='GITHUB_HOST=ghe.kst3.jp hub browse $(find ~/src -follow  -maxdepth 3 -mindepth 3 -type d | cut -d "/" -f 5- | fzf | cut -d "/" -f 2,3)'
+
+
+alias cd="cdls"
+cdls ()
+{
+  \cd "$@" && ls --color=auto -F
+}
 
 if (( $+commands[kubectl] )); then
     alias k=kubectl
