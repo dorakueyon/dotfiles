@@ -103,7 +103,7 @@ if g:plug.ready()
     Plug 'airblade/vim-gitgutter'
     Plug 'rhysd/git-messenger.vim'
     " Plug 'natebosch/vim-lsc'
-    Plug 'neoclide/coc.nvim'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
     "Plug 'prabirshrestha/async.vim'
     "Plug 'prabirshrestha/asyncomplete-lsp.vim'
     "Plug 'prabirshrestha/asyncomplete.vim'
