@@ -67,7 +67,7 @@ alias ghe='GITHUB_HOST=ghe.kst3.jp hub browse $(find ~/src -follow  -maxdepth 3 
 alias cd="cdls"
 cdls ()
 {
-  \cd "$@" && ls --color=auto -F
+  \cd "$@" && ls -GF
 }
 
 if (( $+commands[kubectl] )); then
