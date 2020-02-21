@@ -59,7 +59,7 @@ alias vi="reattach-to-user-namespace vim"
 
 
 # easy way to browse projects listed under ghq
-alias g='cd $(find ~/src -follow  -maxdepth 3 -mindepth 3 -type d|fzf)'
+alias g='cd $(ghq root)/`find ~/src -follow  -maxdepth 3 -mindepth 3 -type d | cut -d "/" -f 5- |fzf --preview "bat --color=always --style=header,grid --line-range :80 $(ghq root)/{}/README.*"`'
 alias gh='hub browse $(find ~/src -follow  -maxdepth 3 -mindepth 3 -type d | cut -d "/" -f 5- | fzf | cut -d "/" -f 2,3)'
 alias ghe='GITHUB_HOST=ghe.kst3.jp hub browse $(find ~/src -follow  -maxdepth 3 -mindepth 3 -type d | cut -d "/" -f 5- | fzf | cut -d "/" -f 2,3)'
 
