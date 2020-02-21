@@ -1,3 +1,46 @@
+month=`date "+%b"`
+
+alias google="vi ~/Dropbox/Projects/google-interview-university/README.md"
+alias machine="vi ~/Dropbox/Projects/machine-learning-for-software-engineers/README.md"
+alias ls="ls --color=auto -GF"
+# alias gls="gls --color"
+
+alias cd="cdls"
+alias vim="reattach-to-user-namespace vim"
+alias vi="reattach-to-user-namespace vim"
+
+# easy way to browse projects listed under ghq
+alias g='cd $(find ~/src -follow  -maxdepth 3 -mindepth 3 -type d|fzf)'
+alias gh='hub browse $(find ~/src -follow  -maxdepth 3 -mindepth 3 -type d | cut -d "/" -f 5- | fzf | cut -d "/" -f 2,3)'
+alias ghe='GITHUB_HOST=ghe.kst3.jp hub browse $(find ~/src -follow  -maxdepth 3 -mindepth 3 -type d | cut -d "/" -f 5- | fzf | cut -d "/" -f 2,3)'
+alias ctags="`brew --prefix`/bin/ctags"
+
+cdls ()
+{
+  \cd "$@" && ls --color=auto -F
+}
+
+# Check whether the vital file is loaded
+if ! vitalize 2>/dev/null; then
+    echo "cannot run as shell script" 1>&2
+    return 1
+fi
+
+alias p="print -l"
+
+# For mac, aliases
+if is_osx; then
+    has "qlmanage" && alias ql='qlmanage -p "$@" >&/dev/null'
+fi
+
+if has 'git'; then
+    alias gst='git status'
+fi
+
+if has 'richpager'; then
+    alias cl='richpager'
+fi
+
 # Common aliases
 alias ..='cd ..'
 
@@ -467,6 +510,7 @@ docker-rmi() {
         | awk '{print $3}' \
         | xargs docker rmi ${1+"$@"}
 }
+#alias -g GG='$(git_modified_files)'
 
 # source <(kubectl completion zsh)
 # source <(kubectl completion zsh | sed 's/__start_kubectl kubectl/__start_kubectl kube/')

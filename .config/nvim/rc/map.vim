@@ -243,5 +243,10 @@ nnoremap <silent>z0 :<C-u>set foldlevel=<C-r>=foldlevel('.')<CR><CR>
 " tig {{{1
 nnoremap <silent> [Space]g :<C-u>!tig blame +<C-r>=line('.')<CR> %<CR>:redraw!<CR>
 
+"" wayland clipboad support
+"xnoremap "+y y:call system("wl-copy", @")<cr>
+"nnoremap "+p :let @"=substitute(system("wl-paste --no-newline"), '<C-v><C-m>', '', 'g')<cr>p
+"nnoremap "*p :let @"=substitute(system("wl-paste --no-newline --primary"), '<C-v><C-m>', '', 'g')<cr>p
+
 " __END__ {{{1
 " vim:fdm=marker expandtab fdc=3:
