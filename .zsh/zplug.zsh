@@ -116,3 +116,5 @@ zplug "takuya/f5a6fb560dc357835122", \
   rename-to:'node2bash'
 
 zplug 'Code-Hex/battery', as:command, from:gh-r
+
+zplug "rupa/z", use:z.sh
