@@ -229,4 +229,4 @@ bindsym $mod+x exec swaylock -f -c 000000
 # Japanese input
 exec fcitx -r -d
 
-exec redshift
+exec redshift -m wayland
