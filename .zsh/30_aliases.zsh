@@ -24,7 +24,7 @@ alias ctags="`brew --prefix`/bin/ctags"
 # Common aliases
 alias ..='cd ..'
 
-alias ls="ls --color=auto -GF"
+alias ls="ls -GF"
 alias ll="ls -l"
 alias ld='ls -ld'          # Show info about the directory
 alias lla='ls -lAF'        # Show hidden all files
