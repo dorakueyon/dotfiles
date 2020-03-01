@@ -2,36 +2,34 @@
     "layer": "top", // Waybar at top layer
     "width": "100%",
     "modules-left": ["sway/workspaces"],
-    "modules-right": ["tray", "cpu", "memory", "backlight", "network", "pulseaudio", "clock"],
+    "modules-right": ["tray", "cpu", "memory", "disk","network", "pulseaudio", "custom/weather","clock"],
     "tray": {
         // "icon-size": 21,
         "spacing": 10
     },
     "clock": {
-        "tooltip-format": "{:%Y-%m-%d | %H:%M}",
-        "format-alt": "{:%Y-%m-%d}",
-        "format": "{:%a %Y-%m-%d %H:%M %p}"
+        "format": "{:%a %d %b %H:%M}",
+        "tooltip": false
     },
     "cpu": {
-        "format": "　{usage}%"
+        "format": " {usage}%"
     },
     "memory": {
-        "format": "　{}%"
+        "format": " {}%"
     },
-    "backlight": {
-        //"device": "intel_backlight",
-        "format": "　{percent}%",
-        "format-icons": ["", ""]
+    "disk": {
+        "interval": 30,
+        "format": " {free}",
+        "path": "/"
     },
     "network": {
-        // "interface": "wlp2s0", // (Optional) To force the use of this interface
-        "format-wifi": "　{signalStrength}%",
+        "format-wifi": " {ipaddr} {signaldBm} {bandwidthDownBits} {bandwidthUpBits}",
         "format-ethernet": "{ifname}: {ipaddr}/{cidr} ethernet",
         "format-disconnected": "⚠"
     },
     "pulseaudio": {
         //"scroll-step": 1,
-        "format": "　{volume}%",
+        "format": " {volume}%",
         "format-bluetooth": "{volume}% {icon}",
         "format-muted": "",
         "format-icons": {
@@ -44,5 +42,14 @@
             "default": ["", ""]
         },
         "on-click": "pavucontrol"
+    },
+    "custom/weather": {
+        "format": "{}",
+        "format-alt": "{alt}: {}",
+        "format-alt-click": "click-right",
+        "interval": 1800,
+        "return-type": "json",
+        "exec": "~/.config/waybar/modules/weather.sh",
+        "exec-if": "ping wttr.in -c1"
     }
 }
