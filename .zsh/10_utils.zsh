@@ -121,3 +121,13 @@ has_sa() {
         | awk '{print $NF}' \
         | grep -i "${1:?}"
 }
+
+fzf-z-search() {
+    local res=$(z | sort -rn | cut -c 12- | fzf)
+    if [ -n "$res" ]; then
+        BUFFER+="cd $res"
+        zle accept-line
+    else
+        return 1
+    fi
+}

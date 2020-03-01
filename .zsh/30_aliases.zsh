@@ -63,6 +63,42 @@ alias g='cd $(ghq root)/`find ~/src -follow  -maxdepth 3 -mindepth 3 -type d | c
 alias gh='hub browse $(find ~/src -follow  -maxdepth 3 -mindepth 3 -type d | cut -d "/" -f 5- | fzf | cut -d "/" -f 2,3)'
 alias ghe='GITHUB_HOST=ghe.kst3.jp hub browse $(find ~/src -follow  -maxdepth 3 -mindepth 3 -type d | cut -d "/" -f 5- | fzf | cut -d "/" -f 2,3)'
 
+# fbr - checkout git branch
+fbr() {
+  local branches branch
+  branches=$(git branch -vv) &&
+  branch=$(echo "$branches" | fzf +m) &&
+  git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+}
+
+# fbrm- checkout git branch (including remote branches)
+fbrm() {
+  local branches branch
+  branches=$(git branch --all | grep -v HEAD) &&
+  branch=$(echo "$branches" |
+           fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
+  git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+}
+
+# fshow - git commit browser
+fshow() {
+  git log --graph --color=always \
+      --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
+  fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
+      --bind "ctrl-m:execute:
+                (grep -o '[a-f0-9]\{7\}' | head -1 |
+                xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
+                {}
+FZF-EOF"
+}
+
+# fd - cd to selected directory
+fd() {
+  local dir
+  dir=$(find ${1:-.} -path '*/\.*' -prune \
+                  -o -type d -print 2> /dev/null | fzf +m) &&
+  cd "$dir"
+}
 
 alias cd="cdls"
 cdls ()

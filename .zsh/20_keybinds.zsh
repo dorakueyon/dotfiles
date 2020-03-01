@@ -197,6 +197,9 @@ peco-select-gitadd() {
 zle -N peco-select-gitadd
 bindkey '^g^a' peco-select-gitadd
 
+zle -N fzf-z-search
+bindkey '^f' fzf-z-search
+
 exec-oneliner() {
     local oneliner_f
     oneliner_f="${ONELINER_FILE:-~/.commnad.list}"
