@@ -44,7 +44,7 @@ output DP-1 resolution 2560x1440 position 1920,0
 #
 #input "1278:33:HHKB-Hybrid_3_Consumer"{
 input * {
-    repeat_delay 180
+    repeat_delay 280
     repeat_rate 40
 }
 
@@ -218,8 +218,8 @@ exec mako
 
 # setup idle
 exec swayidle -w \
-  timeout 300 'swaylock -f -c 000000' \
-  timeout 301 'swaymsg "output * dpms off"' \
+  timeout 1800 'swaylock -f -c 000000' \
+  timeout 1801 'swaymsg "output * dpms off"' \
        resume 'swaymsg "output * dpms on"' \
   before-sleep 'swaylock -f -c 000000' \
 
