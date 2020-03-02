@@ -4,6 +4,7 @@ endif
 
 syntax enable on
 set number
+set relativenumber
 
 if g:env.is_gui
     set background=light
