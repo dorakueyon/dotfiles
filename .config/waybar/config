@@ -23,7 +23,7 @@
         "path": "/"
     },
     "network": {
-        "format-wifi": " {ipaddr} {signaldBm} {bandwidthDownBits} {bandwidthUpBits}",
+        "format-wifi": " {ipaddr} {bandwidthDownBits} {bandwidthUpBits}",
         "format-ethernet": "{ifname}: {ipaddr}/{cidr} ethernet",
         "format-disconnected": "⚠"
     },
