@@ -23,15 +23,17 @@ if g:plug.ready()
     Plug 'b4b4r07/vim-shellutils'
     Plug 'b4b4r07/vim-sqlfmt'
     Plug 'b4b4r07/vim-unicode'
+
     Plug 'chrisbra/csv.vim'
     Plug 'christianrondeau/vim-base64'
-    Plug 'cocopon/vaffle.vim'
+""    Plug 'cocopon/vaffle.vim'
     Plug 'fatih/vim-hclfmt'
     Plug 'haya14busa/vim-gofmt'
     Plug 'hotwatermorning/auto-git-diff'
     Plug 'juliosueiras/vim-terraform-completion'
     Plug 'junegunn/fzf'
     Plug 'junegunn/fzf.vim'
+
     Plug 'justinmk/vim-dirvish'
     Plug 'juvenn/mustache.vim'
     Plug 'kylef/apiblueprint.vim'
