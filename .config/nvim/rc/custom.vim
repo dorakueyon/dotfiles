@@ -509,6 +509,10 @@ if g:plug.is_installed('syntastic') " {{{1
     let g:syntastic_go_checkers = ['go', 'golint']
 endif
 
+if g:plug.is_installed('sonictemplate-vim') "{{{1
+    let g:sonictemplate_vim_template_dir = [ '~/.vim/template']
+endif
+
 
 " __END__ {{{1
 " vim:fdm=marker expandtab fdc=3:
