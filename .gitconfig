@@ -46,12 +46,12 @@
 
 [user]
     name  = YoheiIguchi
-    email = yiguchi@r.recruit.co.jp
+    email = matthew.at.muse@gmail.com
 
 [pager]
-    log  = diff-highlight | less -RX
-    show = diff-highlight | less -RX
-    diff = diff-highlight | less -RX
+    log  = diff-so-fancy | less -RX
+    show = diff-so-fancy | less -RX
+    diff = diff-so-fancy | less -RX
 
 [diff]
     tool      = vimdiff
