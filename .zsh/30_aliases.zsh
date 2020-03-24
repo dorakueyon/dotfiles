@@ -110,6 +110,16 @@ if (( $+commands[kubectl] )); then
     alias k=kubectl
 fi
 
+# cd to the path of the front Finder window
+cdf() {
+  target=`osascript -e 'tell application "Finder" to if (count of Finder windows) > 0 then get POSIX path of (target of front Finder window as text)'`
+  if [ "$target" != "" ]; then
+    cd "$target"; pwd
+  else
+    echo 'No Finder window found' >&2
+  fi
+}
+
 # The first word of each simple command, if unquoted, is checked to see
 # if it has an alias. [...] If the last character of the alias value is
 # a space or tab character, then the next command word following the
