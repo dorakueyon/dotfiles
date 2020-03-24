@@ -209,6 +209,7 @@ endif
 " Use clipboard
 if has('clipboard')
     set clipboard=unnamed
+    set clipboard+=unnamedplus
 endif
 
 if has('patch-7.4.338')
