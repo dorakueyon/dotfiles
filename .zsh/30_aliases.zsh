@@ -24,7 +24,7 @@ alias ctags="`brew --prefix`/bin/ctags"
 # Common aliases
 alias ..='cd ..'
 
-alias ls="ls -GF"
+alias ls="ls --color=auto -GF"
 alias ll="ls -l"
 alias ld='ls -ld'          # Show info about the directory
 alias lla='ls -lAF'        # Show hidden all files
@@ -56,6 +56,7 @@ alias vi="vim"
 # alias nvim='vim -N -u NONE -i NONE'
 alias vim="reattach-to-user-namespace vim"
 alias vi="reattach-to-user-namespace vim"
+alias n="nvim ."
 
 
 # easy way to browse projects listed under ghq
