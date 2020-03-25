@@ -215,7 +215,7 @@ bar {
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 font pango:Noto Mono, FontAwesome 9
 
-exec mako
+#exec mako
 
 # setup idle
 exec swayidle -w \
