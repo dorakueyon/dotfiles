@@ -226,6 +226,11 @@ nnoremap sk <C-w>k
 nnoremap sl <C-w>l
 nnoremap sh <C-w>h
 
+
+" Change 2 split windows from vert to horiz or horiz to vert
+map <Leader>th <C-w>t<C-w>H
+map <Leader>tk <C-w>t<C-w>K
+
 "nnoremap <silent> <C-l> :<C-u>silent! tabnext<CR>
 "nnoremap <silent> <C-h> :<C-u>silent! tabprev<CR>
 nnoremap t <Nop>
