@@ -19,6 +19,14 @@ if has 'richpager'; then
     alias cl='richpager'
 fi
 
+if has 'zathura'; then
+    alias pdf='zathura'
+fi
+
+if has 'thunar'; then
+    alias finder='thunar'
+fi
+
 alias ctags="`brew --prefix`/bin/ctags"
 
 # Common aliases
