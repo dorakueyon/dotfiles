@@ -118,7 +118,7 @@ cmap <c-x> <c-r>=expand('%:p:h')<cr>/
 " expand file (not ext)
 cmap <c-z> <c-r>=expand('%:p:r')<cr>
 " Add a relative number toggle
-nnoremap <silent> <Leader>r :<C-u>call <SID>toggle_option('relativenumber')<CR>
+"nnoremap <silent> <Leader>r :<C-u>call <SID>toggle_option('relativenumber')<CR>
 " Add a spell check toggle
 nnoremap <silent> <Leader>s :<C-u>call <SID>toggle_option('spell')<CR>
 " Tabs Increase
@@ -252,6 +252,10 @@ nnoremap <silent> [Space]g :<C-u>!tig blame +<C-r>=line('.')<CR> %<CR>:redraw!<C
 "xnoremap "+y y:call system("wl-copy", @")<cr>
 "nnoremap "+p :let @"=substitute(system("wl-paste --no-newline"), '<C-v><C-m>', '', 'g')<cr>p
 "nnoremap "*p :let @"=substitute(system("wl-paste --no-newline --primary"), '<C-v><C-m>', '', 'g')<cr>p
+
+" golang {{{1
+autocmd FileType go nmap <leader>b  <Plug>(go-build)
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
 
 " __END__ {{{1
 " vim:fdm=marker expandtab fdc=3:

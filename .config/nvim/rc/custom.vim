@@ -513,6 +513,11 @@ if g:plug.is_installed('sonictemplate-vim') "{{{1
     let g:sonictemplate_vim_template_dir = [ '~/.vim/template']
 endif
 
+if g:plug.is_installed('vim-go') " {{{1
+    let g:go_auto_type_info = 1 
+    let g:go_auto_sameids = 1
+    let g:go_auto_info = 1
+endif
 
 " __END__ {{{1
 " vim:fdm=marker expandtab fdc=3:
