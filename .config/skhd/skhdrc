@@ -49,6 +49,10 @@ cmd - m : return 0
 # "["           (0x21)
 # "]"           (0x1E)
 # "`" (`~`)     (0x32)
+#
+
+# open terminal
+#alt - return : open -a iTerm --new
 
 # close window
 # shift + alt - q : sid="$(yabai -m query --spaces --space | jq '.index')" && osascript -e "tell application \"Finder\" to set p to item 1 of (get file of (processes whose frontmost = true)) as text" -e "tell application p to quit" && yabai -m space --focus "${sid}"
@@ -90,13 +94,13 @@ ctrl + shift + alt - l : yabai -m window --warp east
 ctrl + shift + alt - 0 : yabai -m space --balance
 
 # make floating window fill screen
-shift + alt - up     : yabai -m window --grid 1:1:0:0:1:1
+#shift + alt - up     : yabai -m window --grid 1:1:0:0:1:1
 
 # make floating window fill left-half of screen
-shift + alt - left   : yabai -m window --grid 1:2:0:0:1:1
+#shift + alt - left   : yabai -m window --grid 1:2:0:0:1:1
 
 # make floating window fill right-half of screen
-shift + alt - right  : yabai -m window --grid 1:2:1:0:1:1
+#shift + alt - right  : yabai -m window --grid 1:2:1:0:1:1
 
 # create desktop, move window and follow focus
 # shift + cmd - n : yabai -m space --create;\
