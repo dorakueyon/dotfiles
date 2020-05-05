@@ -60,7 +60,7 @@ input * {
     bindsym $mod+Return exec $term
 
     # Kill focused window
-    bindsym $mod+q kill
+    bindsym $mod+shift+q kill
 
     # Start your launcher
     #bindsym $mod+d exec $menu
