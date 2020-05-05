@@ -67,6 +67,10 @@ fi
 # for arch linux
 export SWAYSOCK=/run/user/$(id -u)/sway-ipc.$(id -u).$(pgrep -x sway).sock
 
+if has "systemctl"; then
+  systemctl --user import-environment PATH
+fi
+
 # tmux_automatically_attach attachs tmux session
 # automatically when your are in zsh
 $DOTPATH/bin/tmuxx
