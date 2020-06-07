@@ -105,12 +105,6 @@ printf "$fg_bold[cyan] - DISPLAY on $fg_bold[red]$DISPLAY$reset_color\n\n"
 
 eval "$(rbenv init - zsh)"
 
-# prompt
-#PROMPT='[%F{magenta}%B%n%b%f@%F{blue}%U%m%u%f]# '
-PROMPT='[%F{yellow}%B%n%b%f]%% '
-#RPROMPT='at [%F{green}%d%f]'
-rpromptpwd='at [%F{green}%d%f]'
-
 # vcs_info
 zstyle ':vcs_info:git:*' check-for-changes true
 zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
@@ -125,3 +119,11 @@ function _update_vcs_info_msg() {
 add-zsh-hook precmd _update_vcs_info_msg
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# prompt
+if has "starship"; then
+  eval "$(starship init zsh)"
+else
+  PROMPT='[%F{yellow}%B%n%b%f]%% '
+  rpromptpwd='at [%F{green}%d%f]'
+fi

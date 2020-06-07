@@ -72,6 +72,7 @@ alias g='cd $(ghq root)/`find ~/src -follow  -maxdepth 3 -mindepth 3 -type d | c
 alias gh='hub browse $(find ~/src -follow  -maxdepth 3 -mindepth 3 -type d | cut -d "/" -f 5- | fzf | cut -d "/" -f 2,3)'
 alias ghe='GITHUB_HOST=ghe.kst3.jp hub browse $(find ~/src -follow  -maxdepth 3 -mindepth 3 -type d | cut -d "/" -f 5- | fzf | cut -d "/" -f 2,3)'
 
+alias gco="fbr"
 # fbr - checkout git branch
 fbr() {
   local branches branch
