@@ -122,6 +122,7 @@ add-zsh-hook precmd _update_vcs_info_msg
 
 # prompt
 if has "starship"; then
+  export STARSHIP_CONFIG=~/.config/starship/starship.toml
   eval "$(starship init zsh)"
 else
   PROMPT='[%F{yellow}%B%n%b%f]%% '
