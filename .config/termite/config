@@ -47,7 +47,7 @@ cursor_shape = block
 # Base16 3024
 # Scheme: Jan T. Sott (http://github.com/idleberg)
 #
-background = rgba(63, 63, 63, 0.5)
+background = rgba(63, 63, 63, 0.9)
 foreground=#a5a2a2
 #background=#090300
 cursor=#a5a2a2
