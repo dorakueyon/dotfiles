@@ -2,6 +2,7 @@
     "layer": "top", // Waybar at top layer
     "position": "bottom",
     "width": "100%",
+    "modules-left": ["clock"],
     "modules-center": ["sway/workspaces"],
     "modules-right": ["tray", "cpu", "memory", "disk","network", "pulseaudio", "custom/weather","clock"],
     "tray": {
