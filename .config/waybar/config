@@ -2,8 +2,8 @@
     "layer": "top", // Waybar at top layer
     "position": "bottom",
     "width": "100%",
-    "modules-left": ["clock"],
-    "modules-center": ["sway/workspaces"],
+    "modules-left": [],
+    "modules-center": ["custom/clock-only-hm","sway/workspaces"],
     "modules-right": ["tray", "cpu", "memory", "disk","network", "pulseaudio", "custom/weather","clock"],
     "tray": {
         // "icon-size": 21,
@@ -53,5 +53,10 @@
         "return-type": "json",
         "exec": "~/.config/waybar/modules/weather.sh",
         "exec-if": "ping wttr.in -c1"
+    },
+    "custom/clock-only-hm": {
+        "format": "{}",
+        "interval": 10,
+        "exec": "date '+%H:%M'",
     }
 }
