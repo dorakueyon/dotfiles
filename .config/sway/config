@@ -14,8 +14,8 @@ set $term termite
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 set $menu dmenu_path | rofi -dmenu | xargs swaymsg exec
-set $wallpaperchange ~/.config/sway/scripts/bg.sh
-set $wallpapers_path $HOME/Images/wallpapers/random.jpg 
+set $wallpapers_path $HOME/Images/wallpapers 
+
 #gaps vertical 100
 gaps top 400
 gaps bottom 30
@@ -27,8 +27,7 @@ gaps inner 10
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 #output * bg /usr/share/backgrounds/sway/eliot_wallpaper.jpg fill
 # https://github.com/swaywm/sway/issues/1269
-#output * bg `find $wallpapers_path -type f | shuf -n 1` fill
-output * bg $wallpapers_path fill
+output * bg `find $wallpapers_path -type f | shuf -n 1` fill
 
 output DP-1 resolution 2560x1440 position 1920,0
 
@@ -64,7 +63,7 @@ input * {
 # Basics:
 #
     # change desktop
-    bindsym $mod+c exec $wallpaperchange;output * bg $wallpapers_path fill
+    bindsym $mod+c output * bg `find $wallpapers_path -type f | shuf -n 1` fill
 
     # Start a terminal
     bindsym $mod+Return exec $term
@@ -241,5 +240,3 @@ bindsym $mod+x exec swaylock -f -c 000000
 exec fcitx -r -d
 
 exec redshift -m wayland
-
-exec $wallpaperchange
