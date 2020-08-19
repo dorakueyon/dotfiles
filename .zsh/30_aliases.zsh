@@ -31,19 +31,21 @@ alias ctags="`brew --prefix`/bin/ctags"
 
 # Common aliases
 alias ..='cd ..'
+alias ...='cd ../..'
 
-alias ls="ls -GF"
-alias ll="ls -l"
-alias ld='ls -ld'          # Show info about the directory
-alias lla='ls -lAF'        # Show hidden all files
-alias ll='ls -lF'          # Show long file information
-alias la='ls -AF'          # Show hidden files
-alias lx='ls -lXB'         # Sort by extension
-alias lk='ls -lSr'         # Sort by size, biggest last
-alias lc='ls -ltcr'        # Sort by and show change time, most recent last
-alias lu='ls -ltur'        # Sort by and show access time, most recent last
-alias lt='ls -ltr'         # Sort by date, most recent last
-alias lr='ls -lR'          # Recursive ls
+alias ls="exa -a --color=always --group-directories-first"
+alias l.='exa -a | egrep "^\."'
+alias ll="exa -l"
+alias ld='exa -ld'          # Show info about the directory
+alias lla='exa -lAF'        # Show hidden all files
+alias ll='exa -lF'          # Show long file information
+alias la='exa -AF'          # Show hidden files
+alias lx='exa -lXB'         # Sort by extension
+alias lk='exa -lSr'         # Sort by size, biggest last
+alias lc='exa -ltcr'        # Sort by and show change time, most recent last
+alias lu='exa -ltur'        # Sort by and show access time, most recent last
+alias lt='exa -ltr'         # Sort by date, most recent last
+alias lr='exa -lR'          # Recursive ls
 
 alias cp="${ZSH_VERSION:+nocorrect} cp -i"
 alias mv="${ZSH_VERSION:+nocorrect} mv -i"
@@ -591,3 +593,13 @@ git-replace()
             ;;
     esac
 }
+
+# pacman and yay
+alias yaysua='yay -Sua --noconfirm'   # update only AUR pkgs
+alias yaysyu='yay -Syu --noconfirm'   # update standard and AUR pkgs
+
+## get top process eating memory
+alias psmem="ps auxf | sort -nr -k 4"
+
+## get top process eating cpu
+alias pscpu="ps auxf | sort -nr -k 3"
