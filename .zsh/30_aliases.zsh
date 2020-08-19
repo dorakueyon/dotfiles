@@ -37,9 +37,9 @@ alias ls="exa -a --color=always --group-directories-first"
 alias l.='exa -a | egrep "^\."'
 alias ll="exa -l"
 alias ld='exa -ld'          # Show info about the directory
-alias lla='exa -lAF'        # Show hidden all files
+alias lla='exa -laF'        # Show hidden all files
 alias ll='exa -lF'          # Show long file information
-alias la='exa -AF'          # Show hidden files
+alias la='exa -aF'          # Show hidden files
 alias lx='exa -lXB'         # Sort by extension
 alias lk='exa -lSr'         # Sort by size, biggest last
 alias lc='exa -ltcr'        # Sort by and show change time, most recent last
