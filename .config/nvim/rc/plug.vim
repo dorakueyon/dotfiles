@@ -56,7 +56,7 @@ if g:plug.ready()
     Plug 'tyru/open-browser-github.vim'
     Plug 'tyru/open-browser.vim'
     Plug 'vim-jp/vimdoc-ja'
-    Plug 'w0rp/ale'
+    Plug 'dense-analysis/ale'
 
     " syntax? language support
     Plug 'b4b4r07/vim-ltsv', { 'for': 'ltsv' }
@@ -77,6 +77,7 @@ if g:plug.ready()
     Plug 'rhysd/vim-syntax-codeowners'
     " Plug 'mattn/vim-lexiv'
     Plug 'tsandall/vim-rego'
+    Plug 'rust-lang/rust.vim'
 
     " colorscheme
     Plug 'AlessandroYorba/Despacio'
