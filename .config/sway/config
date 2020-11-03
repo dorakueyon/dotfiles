@@ -66,14 +66,14 @@ input * {
     bindsym $mod+c output * bg `find $wallpapers_path -type f | shuf -n 1` fill
 
     # Start a terminal
-    bindsym ctrl+Return exec $term
+    bindsym $mod+Shift+Return exec $term
 
     # Kill focused window
-    bindsym $mod+shift+q kill
+    bindsym $mod+Shift+q kill
 
     # Start your launcher
     #bindsym $mod+d exec $menu
-    bindsym $mod+Return exec $menu
+    bindsym ctrl+Return exec $menu
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
