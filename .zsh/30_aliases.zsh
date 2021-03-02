@@ -62,10 +62,10 @@ alias egrep='egrep --color=auto'
 
 alias vi="vim"
 
-# Use plain vim.
-# alias nvim='vim -N -u NONE -i NONE'
-alias vim="reattach-to-user-namespace vim"
-alias vi="reattach-to-user-namespace vim"
+## Use plain vim.
+## alias vim='vim -N -u NONE -i NONE'
+#alias vim="reattach-to-user-namespace nvim"
+alias vi="reattach-to-user-namespace nvim"
 alias n="nvim ."
 
 
