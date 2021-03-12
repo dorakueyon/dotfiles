@@ -9,7 +9,7 @@ set $up k
 set $right l
 # Your preferred terminal emulator
 #set $term terminator
-set $term termite
+set $term terminator
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -17,9 +17,9 @@ set $menu dmenu_path | rofi -dmenu | xargs swaymsg exec
 set $wallpapers_path $HOME/Images/wallpapers 
 
 #gaps vertical 100
-gaps top 400
-gaps bottom 30
-gaps horizontal 300
+gaps top 20
+gaps bottom 20
+gaps horizontal 100 
 gaps inner 10
 
 ### Output configuration
