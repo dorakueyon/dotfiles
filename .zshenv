@@ -71,8 +71,9 @@ export NVM_DIR="/Users/yoheia/.nvm"
 # Add ~/.rbenv/bin to PATH
 export PATH="$PATH:$HOME/.rbenv/bin"
 
-# Add ~/.nodebrew/current/bin to PATH
-export PATH="$PATH:$HOME/.nodebrew/current/bin"
+## Add ~/.nodebrew/current/bin to PATH
+#export PATH="$PATH:$HOME/.nodebrew/current/bin"
+#export PATH="$PATH:$HOME/.anyenv/bin"
 
 
 # Settings for golang
@@ -117,3 +118,4 @@ fi
 export INTERACTIVE_FILTER="fzf:peco:percol:gof:pick"
 
 export DOTPATH=${0:A:h}
+source "$HOME/.cargo/env"

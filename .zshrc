@@ -53,6 +53,13 @@ if [ -d "${PYENV_ROOT}" ]; then
   eval "$(pyenv init -)"
 fi
 
+export ANYENV_ROOT="${HOME}/.anyenv"
+if [ -d "${ANYENV_ROOT}" ]; then
+  export PATH=${ANYENV_ROOT}/bin:$PATH
+  eval "$(anyenv init -)"
+fi
+
+
 export ENHANCD_FILTER="fzy:$ENHANCD_FILTER"
 
 # Exit if called from vim
